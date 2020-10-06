@@ -23,11 +23,20 @@ public class DataTypes {
         double hight = 180.23;           // double: 64 bits - (double-precision) floating point numbers
         // usually use float to save memory, but when need to be more aculate, use double
 
+
+        // Operaters
         int x = 10;
         x++;
         System.out.printf("x is %d\n", x);
         // ++x is faster than x += 1
 
+        // Java does not have // (get only int part) because, the result should be set in a type and it decide if the result have int or under "."
+        int w = 10;
+        int y = 3;
+        int z = w / y;  // 3
+        double d = (double) (w / y);   // 3.333
+        // int c = (int) x / y;  // cast x to int
+        // int d = (int) (x / y);   // cast the result of division to int
 
         // other types are custom types and stored as different value with address!!!!!
     }
