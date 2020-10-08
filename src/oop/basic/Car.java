@@ -4,12 +4,22 @@ package oop.basic;
 // way 3: add constructor with values + new Car(value1, value2,..) -> use this constructor with values
 
 public class Car {
-    // ('this' refers here) : set of variables (states)
+    /////////////////////////////////
+    // Instance variables (states) //
+    // - data fields               //
+    /////////////////////////////////
+    // ('this' refers here)
     String color;
     String brand;
     int year;
     int hoursePower;
     int seats;
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////
+    // Constructor: to create a new instance(object), 'initialize' instance variables   //
+    //////////////////////////////////////////////////////////////////////////////////////
 
     // (way1) if there is no constructors, JAVA gives a default constructor
 
@@ -40,11 +50,16 @@ public class Car {
         this.seats = seats;
     }
 
-    // set of methods (behaviors)
+
+    /////////////////////////
+    // Methods (behaviors) //
+    /////////////////////////
+
     // (method1)
     void drive() {
         System.out.println("Driving.." + this.brand);
     }
+
     // 'method overloading'
     // - create methods with the same name with different set of parameters
     // (method2)
