@@ -24,7 +24,12 @@ public class DataTypes {
         // usually use float to save memory, but when need to be more aculate, use double
 
 
-        // Operaters
+        // Operators
+        // Arithmetic: +, -, *, /, %
+        // Assignment: =
+        // Comparison: >, <, >=, <=, ==, !=
+        // Increment(Decrement): ++, --, +=, -=
+        // Logical: && (and), || (or), ! (not)
         int x = 10;
         x++;
         System.out.printf("x is %d\n", x);
@@ -34,9 +39,19 @@ public class DataTypes {
         int w = 10;
         int y = 3;
         int z = w / y;  // 3
-        double d = (double) (w / y);   // 3.333
+        double d = w / y;   // 3.000 (int / int = integer)
+        System.out.println(String.format("%.3f", d));
+        double d2 = (double) w / y;   // 3.333 (double / int = double)
+        System.out.println(String.format("%.3f", d2));
         // int c = (int) x / y;  // cast x to int
         // int d = (int) (x / y);   // cast the result of division to int
+
+        double numerator = 10;
+        double denominator = 3;
+        System.out.println(String.format("%.3f", numerator / denominator)); // 3.333 (double / double = double)
+        int intDenom = 3;
+        System.out.println(String.format("%.3f", numerator / intDenom)); // 3.333 (double / int = double)
+
 
         // other types are custom types and stored as different value with address!!!!!
     }

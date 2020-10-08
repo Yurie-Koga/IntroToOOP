@@ -16,3 +16,11 @@ public class Hello {
         // commit testing
     }
 }
+
+// python - interpreted language, dynamic typing
+// java - compiled language, static typing
+//      - source code -> byte code
+//      - runs on JVM (Java Virtual Machine) -> 'portable'
+//      - Designed 1990s, one of the most popular programming languages
+//      - Web back-end (server-side), 'Enterprise' size Application
+//      - 'Object-Oriented Programming' Language
