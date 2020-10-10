@@ -71,6 +71,16 @@ public class Car {
         System.out.println("Stopping..");
     }
 
-
+    // return class objects as strings
+    @Override
+    public String toString() {
+        return "Car{" +
+                "color='" + color + '\'' +
+                ", brand='" + brand + '\'' +
+                ", year=" + year +
+                ", hoursePower=" + hoursePower +
+                ", seats=" + seats +
+                '}';
+    }
 }
 

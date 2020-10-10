@@ -28,6 +28,7 @@ public class Driver {
         System.out.print("c3 drive: ");
         c3.drive();            // (method1)
         c3.drive(100);  // (method2)
+        System.out.println(c3.toString());  // class.toString() : needs to be created as a method in the Car class
     }
 }
 
