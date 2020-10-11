@@ -1,27 +1,16 @@
 package week1.keyboardinput;
 
+import static week1.InputMethods.*;
+
 public class AgeInFiveYears {
-    private String name;
-    private int age;
+    public static void main(String[] args) {
+        System.out.print("Hello.  What is your name? ");
+        String name =  getString();
 
-    public AgeInFiveYears(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
+        System.out.print("\nHi, " + name + "!  How old are you? ");
+        int age = getInt();
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
+        System.out.println("\nDid you know that in five years you will be " + (age + 5) + " years old?");
+        System.out.println("And five years ago you were " + (age - 5) + "! Imagine that!");
     }
 }

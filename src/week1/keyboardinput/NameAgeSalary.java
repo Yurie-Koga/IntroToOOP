@@ -1,37 +1,19 @@
 package week1.keyboardinput;
 
+import static week1.InputMethods.*;
+
 public class NameAgeSalary {
-    private String name;
-    private int age;
-    private float salary;
+    public static void main(String[] args) {
+        System.out.println("Hello.  What is your name?");
+        String name = getString();
 
-    public NameAgeSalary(String name, int age, float salary) {
-        this.name = name;
-        this.age = age;
-        this.salary = salary;
-    }
+        System.out.println("\nHi, " + name + "!  How old are you?");
+        int age = getInt();
 
-    public String getName() {
-        return name;
-    }
+        System.out.println("\nSo you're " + age + ", eh?  That's not old at all!");
+        System.out.println("How much do you make, " + name + "?");
+        float salary = getFloat();
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public float getSalary() {
-        return salary;
-    }
-
-    public void setSalary(float salary) {
-        this.salary = salary;
+        System.out.println("\n" + salary + "!  I hope that's per hour and not per year! LOL!");
     }
 }

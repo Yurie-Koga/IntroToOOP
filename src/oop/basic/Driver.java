@@ -11,7 +11,7 @@ public class Driver {
         c1.color = "Yellow";
         c1.brand = "Lamborghini";
         c1.year = 2020;
-        c1.hoursePower = 550;
+        c1.horsePower = 550;
         c1.seats = 2;
 
         System.out.print("c1 drive: ");

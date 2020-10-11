@@ -1,32 +1,9 @@
 package week1.variables;
 
 public class StillUsingVariables {
-    private String name;
-    private int year;
-
-    public StillUsingVariables(String name, int year) {
-        this.name = name;
-        this.year = year;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    @Override
-    public String toString() {
-        return "My name is " + name + " and I'll graduate in " + year + ".";
+    public static void main(String[] args) {
+        String name = "Juan Valdez";
+        int graduateYear = 2010;
+        System.out.println("My name is " + name + " and I'll graduate in " + graduateYear + ".");
     }
 }

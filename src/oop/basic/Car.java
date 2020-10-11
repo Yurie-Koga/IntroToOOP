@@ -12,7 +12,7 @@ public class Car {
     String color;
     String brand;
     int year;
-    int hoursePower;
+    int horsePower;
     int seats;
 
 
@@ -29,7 +29,7 @@ public class Car {
         this.color = "Red";
         this.brand = "Ferrari";
         this.year = 2019;
-        this.hoursePower = 540;
+        this.horsePower = 540;
         this.seats = 2;
     }
 
@@ -41,12 +41,12 @@ public class Car {
 //        hoursePower = hp;
 //        seats = s;
 //    }
-    Car(String color, String brand, int year, int hoursePower, int seats) {
+    Car(String color, String brand, int year, int horsePower, int seats) {
         // 'this' refers to the instance that's being used = above variables ^^
         this.color = color;
         this.brand = brand;
         this.year = year;
-        this.hoursePower = hoursePower;
+        this.horsePower = horsePower;
         this.seats = seats;
     }
 
@@ -78,7 +78,7 @@ public class Car {
                 "color='" + color + '\'' +
                 ", brand='" + brand + '\'' +
                 ", year=" + year +
-                ", hoursePower=" + hoursePower +
+                ", hoursePower=" + horsePower +
                 ", seats=" + seats +
                 '}';
     }
