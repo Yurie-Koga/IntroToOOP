@@ -5,7 +5,7 @@ import static week1.InputMethods.*;
 public class HowOldAreYouSpecifically {
     public static void main(String[] args) {
         System.out.print("Hey, what's your name? (Sorry, I keep forgetting.) ");
-        String name =  getString();
+        String name = getString();
 
         System.out.print("Ok, " + name + ", how old are you? ");
         int age = getInt();

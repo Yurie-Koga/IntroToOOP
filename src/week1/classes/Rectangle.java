@@ -1,5 +1,7 @@
 package week1.classes;
 
+import java.util.regex.Pattern;
+
 public class Rectangle {
     private int width;
     private int height;
@@ -49,25 +51,49 @@ public class Rectangle {
         this.color = color;
     }
 
-    public void draw(){
-        if(!isColor()){
-            return;
+    // Changed to return as String to test
+//    public void draw(){
+//        if(!isColor()){
+//            return;
+//        }
+//        for(int h = 0; h < height; h++){
+//            for(int w = 0; w < width; w++){
+//                System.out.print(color.toUpperCase().charAt(0));
+//            }
+//            System.out.println();
+//        }
+//    }
+
+    public String draw(){
+        String msg = checkColor();
+        if(!isNullOrEmpty(msg)){
+            return msg;
         }
+        String result = "";
         for(int h = 0; h < height; h++){
             for(int w = 0; w < width; w++){
-                System.out.print(color.toUpperCase().charAt(0));
+                result += String.format(String.valueOf(color.toUpperCase().charAt(0)));
             }
-            System.out.println();
+            result += "\n";
+        }
+        result = result.replaceAll("\n$", "");
+//        result = result.replace("\n$", "");   // 'replace' is for char.
+        return result;
+    }
+
+    private String checkColor(){
+        if(color.length() <= 2 ||  20 <= color.length() ){
+            return "Color has to be more than 2 characters long and less than 20.";
+        }else{
+            this.color = color.toUpperCase();
+            return "";
         }
     }
 
-    private boolean isColor(){
-        if(color.length() <= 2 ||  20 <= color.length() ){
-            System.out.println("Color has to be more than 2 characters long and less than 20.");
+    private static boolean isNullOrEmpty(String str) {
+        if(str != null && !str.trim().isEmpty()) {
             return false;
-        }else{
-            this.color = color.toUpperCase();
-            return true;
         }
+        return true;
     }
 }
