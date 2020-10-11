@@ -3,10 +3,6 @@ package week1.classes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class RectangleTest {
 
     @Test
@@ -23,14 +19,15 @@ class RectangleTest {
         };
         for(Object[][] c: cases){
             String expected = c[1][0].toString();
-            String actual;
+
+            Rectangle r;
             if (c[0].length > 2){
-                Rectangle r = new Rectangle((int)c[0][0], (int)c[0][1], c[0][2].toString());
-                actual = r.draw();
+                r = new Rectangle((int) c[0][0], (int) c[0][1], c[0][2].toString());
             }else{
-                Rectangle r = new Rectangle((int)c[0][0], (int)c[0][1]);
-                actual = r.draw();
+                r = new Rectangle((int) c[0][0], (int) c[0][1]);
             }
+            String actual = r.draw();
+
             Assertions.assertEquals(expected, actual);
         }
     }
