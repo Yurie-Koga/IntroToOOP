@@ -18,7 +18,7 @@ public class InputMethods {
     public static int getInt() {
         Scanner inp = new Scanner(System.in);
         try {
-            return Integer.parseInt(inp.nextLine());
+            return inp.nextInt();
         } catch (Exception e){
             System.out.println("Invalid input! Try again.");
             return getInt();
@@ -30,7 +30,7 @@ public class InputMethods {
     public static float getFloat() {
         Scanner inp = new Scanner(System.in);
         try {
-            return Float.parseFloat(inp.nextLine());
+            return inp.nextFloat();
         } catch (Exception e){
             System.out.println("Invalid input! Try again.");
             return getFloat();
