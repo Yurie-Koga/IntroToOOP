@@ -2,24 +2,24 @@ package lab1;
 
 public class Driver {
     public static void main(String[] args) {
-//        System.out.println("===== valid cases =====");
-//        validCases();
-//        System.out.println();
-
-//        System.out.println("===== edge cases validation =====");
-//        edgeCasesValidation();
-//        System.out.println();
-
-//        System.out.println("===== edge cases salary =====");
-//        edgeCasesSalary();
-//        System.out.println();
-
-//        System.out.println("===== invalid cases =====");
-//        invalidCases();
-//        System.out.println();
-
         System.out.println("===== getter/setter cases =====");
         getSetCases();
+        System.out.println();
+
+        System.out.println("===== valid cases =====");
+        validCases();
+        System.out.println();
+
+        System.out.println("===== edge cases validation =====");
+        edgeCasesValidation();
+        System.out.println();
+
+        System.out.println("===== edge cases salary =====");
+        edgeCasesSalary();
+        System.out.println();
+
+        System.out.println("===== invalid cases =====");
+        invalidCases();
         System.out.println();
     }
 
