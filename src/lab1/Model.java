@@ -20,8 +20,8 @@ public class Model {
     ////////////////////////////////////////////////////////////////////////
     private String firstName;
     private String lastName;
-    private int height;
-    private double weight;
+    private int height;         // in inches
+    private double weight;      // in pounds
     private boolean canTravel;
     private boolean smokes;
 
@@ -40,8 +40,9 @@ public class Model {
      * @param weight    A double of weight
      * @param canTravel A boolean if can travel
      * @param smokes    A boolean if smoke
+     * @throws IllegalArgumentException
      */
-    public Model(String firstName, String lastName, int height, double weight, boolean canTravel, boolean smokes) {
+    public Model(String firstName, String lastName, int height, double weight, boolean canTravel, boolean smokes) throws IllegalArgumentException {
         setFirstName(firstName);
         setLastName(lastName);
         setHeight(height);
@@ -58,12 +59,7 @@ public class Model {
      * @param weight    A double of weight
      */
     public Model(String firstName, String lastName, int height, double weight) {
-        setFirstName(firstName);
-        setLastName(lastName);
-        setHeight(height);
-        setWeight(weight);
-        setCanTravel(true);
-        setSmokes(false);
+        this(firstName, lastName, height, weight, true, false);
     }
 
     /**
@@ -74,7 +70,12 @@ public class Model {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    /**
+     * Set the first name
+     * @param firstName A string of first name
+     * @throws IllegalArgumentException
+     */
+    public void setFirstName(String firstName) throws IllegalArgumentException {
         checkName(firstName);
         this.firstName = firstName;
     }
@@ -87,8 +88,13 @@ public class Model {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        checkName(firstName);
+    /**
+     * Set the last name
+     * @param lastName  A string of last name
+     * @throws IllegalArgumentException
+     */
+    public void setLastName(String lastName) throws IllegalArgumentException  {
+        checkName(lastName);
         this.lastName = lastName;
     }
 
@@ -100,9 +106,21 @@ public class Model {
         return height;
     }
 
-    public void setHeight(int height) {
-        checkHeight(height);
-        this.height = height;
+    /**
+     * Set the height
+     * @param inches    An integer of height
+     * @throws IllegalArgumentException
+     */
+    public void setHeight(int inches) throws IllegalArgumentException  {
+        checkHeight(inches);
+        this.height = inches;
+    }
+    public void setHeight(int feet, int inches) {
+        inches += getHeightInInches(feet);
+        setHeight(inches);
+    }
+    public int getHeightInInches(int feet){
+        return feet * INCHES_PER_FOOT;
     }
 
     /**
@@ -113,22 +131,24 @@ public class Model {
         return weight;
     }
 
-    public void setWeight(double weight) {
-        checkWeight(weight);
-        this.weight = weight;
+    /**
+     * Set the weight in pounds
+     * @param pounds    a double of weight
+     * @throws IllegalArgumentException
+     */
+    public void setWeight(double pounds) throws IllegalArgumentException {
+        checkWeight(pounds);
+        this.weight = pounds;
     }
+
+    /**
+     * Convert the weight in kilograms to pounds and set to the weight
+     * @param kilograms A long of weight
+     */
     public void setWeight(long kilograms) {
-
+        double p = getWeightPounds(kilograms);
+        setWeight(p);
     }
-//    public void setWeight(double pounds) {
-//
-//    }
-    public void setHeight(int feet, int inches) {
-
-    }
-//    public void setHeight(int inches) {
-//
-//    }
 
     public boolean isCanTravel() {
         return canTravel;
@@ -146,6 +166,7 @@ public class Model {
         this.smokes = smokes;
     }
 
+
     /**
      * Return height in feet and inches
      * @return A string of feet and inches
@@ -154,7 +175,7 @@ public class Model {
         int feet = height / INCHES_PER_FOOT;
         int inches = height % INCHES_PER_FOOT;
         if (inches == 0)
-            return String.format("%d", feet);
+            return String.format("%d feet", feet);
         else if (inches == 1)
             return String.format("%d and %d inch", feet, inches);
         else
@@ -163,11 +184,20 @@ public class Model {
 
     /**
      * Return weight in kilograms
-     * @param weight    A double of weight
+     * @param pounds    A double of weight
      * @return  weight in kilograms
      */
-    public long getWeightKg(double weight) {
-        return Math.round(weight * POUNDS_PER_KG);
+    public long getWeightKg(double pounds) {
+        return Math.round(pounds / POUNDS_PER_KG);
+    }
+
+    /**
+     * Return weight in pounds
+     * @param kilograms A long of weight
+     * @return  weight in pounds
+     */
+    public long getWeightPounds(long kilograms) {
+        return Math.round(kilograms * POUNDS_PER_KG);
     }
 
     /**
@@ -197,12 +227,16 @@ public class Model {
      */
     public int calculatePayDollarsPerHour() {
         int salary = BASE_RATE_DOLLARS_PER_HOUR;
+
         if (isTall() && isThin())
             salary += TALL_THIN_BONUS_DOLLARS_PER_HOUR;
+
         if (isCanTravel())
             salary += TRAVEL_BONUS_DOLLARS_PER_HOUR;
+
         if (isSmokes())
             salary -= SMOKER_DEDUCTION_DOLLARS_PER_HOUR;
+
         return salary;
     }
 
