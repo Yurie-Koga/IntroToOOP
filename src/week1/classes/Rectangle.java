@@ -14,7 +14,7 @@ public class Rectangle {
     }
 
     public Rectangle(int width, int height, String color) {
-        setWidth(width);
+        setWidth(width);    // If use setter in constructors, setters should be 'final' to avoid override error
         setHeight(height);
         setColor(color);
     }
@@ -23,7 +23,8 @@ public class Rectangle {
         return width;
     }
 
-    public void setWidth(int width) {
+    // If use setter in constructors, setters should be 'final' to avoid override error
+    public final void setWidth(int width) {
         if (width > 0){
             this.width = width;
         }else{
@@ -35,7 +36,7 @@ public class Rectangle {
         return height;
     }
 
-    public void setHeight(int height) {
+    public final void setHeight(int height) {
         if (width > 0){
             this.height = height;
         }else{
@@ -47,7 +48,7 @@ public class Rectangle {
         return color;
     }
 
-    public void setColor(String color) {
+    public final void setColor(String color) {
         this.color = color;
     }
 
