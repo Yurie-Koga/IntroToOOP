@@ -38,4 +38,16 @@ public class InputMethods {
 //            inp.close();
         }
     }
+
+    public static char getChar() {
+        Scanner inp = new Scanner(System.in);
+        try {
+            return inp.nextLine().charAt(0);
+        } catch (Exception e){
+            System.out.println("Invalid input! Try again.");
+            return getChar();
+//        } finally {
+//            inp.close();
+        }
+    }
 }
