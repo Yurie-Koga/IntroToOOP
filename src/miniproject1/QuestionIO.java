@@ -48,7 +48,8 @@ public class QuestionIO {
                     q.getWrongLog().add(inpChar);
 
                 // Game Fin
-                if (isGameOver(q.getWrongLog().size())) {
+//                if (isGameOver(q.getWrongLog().size())) {
+                if(q.isGameOver()) {
                     displayWrongLog(q);
                     System.out.println("You lose!");
                     System.out.printf("The correct word was '%s'!%n", q.getCity());

@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import static miniproject1.QuestionValidation.*;
+import static miniproject1.QuestionValidation.isGameOver;
 
 public class Question {
     ///////////////////////////////////////////////////
@@ -129,6 +130,11 @@ public class Question {
             isReveal = true;
         }
         return isReveal;
+    }
+
+    public boolean isGameOver() {
+        //return isGameOver(wrongLog.size());
+        return false;
     }
 
     public String inputLogToString() {

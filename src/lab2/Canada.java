@@ -10,6 +10,7 @@ public class Canada {
      */
     public Canada() {
         provinces = new Province[10];
+        // provinces[0] = new Province(....);   // <- this is also okay instead of Array.set()
         Array.set(provinces, 0, new Province("Alberta", "Edmonton", 4067175));
         Array.set(provinces, 1, new Province("British Columbia", "Victoria", 4648055));
         Array.set(provinces, 2, new Province("Manitoba", "Winnipeg", 1278365));
