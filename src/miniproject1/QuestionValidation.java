@@ -4,15 +4,17 @@ import java.util.regex.Pattern;
 
 public class QuestionValidation {
     ////////////////////////////////////////////////////
+    private static final int VALID_INPUT_LENGTH = 1;
     private static final int MAX_STEPS = 10;
     ////////////////////////////////////////////////////
 
-    public static boolean isValidInput(char inpChar) {
+    public static boolean isValidLength(Object input) {
+        return (input.toString().trim().length() == VALID_INPUT_LENGTH);
+    }
+
+    public static boolean isValidInput(Object input) {
         // only alphabet is valid
-        if (!Pattern.compile("^[a-z]{1}$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(inpChar)).find())
-            return false;
-        else
-            return true;
+        return (Pattern.compile("^[a-z]$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(input)).find());
     }
 
     public static boolean isFin(Object input, String target) {
@@ -21,5 +23,9 @@ public class QuestionValidation {
 
     public static boolean isWin(int steps) {
         return (steps <= MAX_STEPS);
+    }
+
+    public static boolean isGameOver(int steps) {
+        return (steps >= MAX_STEPS);
     }
 }
