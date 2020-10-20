@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static miniproject1.QuestionValidation.*;
-import static miniproject1.QuestionValidation.isGameOver;
-
 public class Question {
     ///////////////////////////////////////////////////
     // String: immutable.
@@ -133,8 +130,11 @@ public class Question {
     }
 
     public boolean isGameOver() {
-        //return isGameOver(wrongLog.size());
-        return false;
+        return QuestionValidation.isGameOver(wrongLog.size());
+    }
+
+    public boolean isFin() {
+        return QuestionValidation.isFin(unRevealed, city);
     }
 
     public String inputLogToString() {

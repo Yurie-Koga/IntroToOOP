@@ -48,18 +48,18 @@ public class QuestionIO {
                     q.getWrongLog().add(inpChar);
 
                 // Game Fin
-//                if (isGameOver(q.getWrongLog().size())) {
                 if(q.isGameOver()) {
                     displayWrongLog(q);
                     System.out.println("You lose!");
                     System.out.printf("The correct word was '%s'!%n", q.getCity());
                     break;
-                } else if (isFin(q.getUnRevealed(), q.getCity())) {
+                } else if (q.isFin()) {
                     System.out.println("You win!");
                     System.out.printf("You have guessed '%s' correctly!%n", q.getCity());
                     break;
                 }
 
+                // Show current guessing and continue
                 System.out.printf("You are guessing: %s%n", q.getUnRevealed());
                 displayWrongLog(q);
             }

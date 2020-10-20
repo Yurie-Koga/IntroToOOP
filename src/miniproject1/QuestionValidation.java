@@ -21,10 +21,6 @@ public class QuestionValidation {
         return (input.toString().equals(target.toLowerCase()));
     }
 
-    public static boolean isWin(int steps) {
-        return (steps <= MAX_STEPS);
-    }
-
     public static boolean isGameOver(int steps) {
         return (steps >= MAX_STEPS);
     }
