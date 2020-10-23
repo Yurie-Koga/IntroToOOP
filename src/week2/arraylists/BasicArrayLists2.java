@@ -1,9 +1,6 @@
 package week2.arraylists;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static week2.CommonMethods.*;
 
@@ -16,14 +13,6 @@ import static week2.CommonMethods.*;
 public class BasicArrayLists2 {
     public static void main(String[] args) {
         ArrayList<Integer> nums = randomIntArrList(10, 1, 100);
-//        System.out.println(nums.get(0) + ", " + nums.get(1));
-
-
-        // ArrayList: 56 76 31 93 22 38 44 11 8 6
-        System.out.println("ArrayList: " + nums.stream().map(Object::toString).collect(Collectors.joining(" ")));
-
-        // ArrayList: [56, 76, 31, 93, 22, 38, 44, 11, 8, 6]    : 'delimiter' does not work
-        System.out.println("ArrayList: " + Arrays.asList(nums).stream().map(Objects::toString).collect(Collectors.joining(" ")));
-        System.out.println("ArrayList: " + Arrays.asList(nums).stream().map(Objects::toString).collect(Collectors.joining()));
+        displayArrList(nums);
     }
 }

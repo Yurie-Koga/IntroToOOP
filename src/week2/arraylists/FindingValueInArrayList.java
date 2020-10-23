@@ -1,9 +1,6 @@
 package week2.arraylists;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static week1.InputMethods.getInt;
 import static week2.CommonMethods.*;
@@ -29,26 +26,17 @@ public class FindingValueInArrayList {
     }
 
     private static void findNumber(ArrayList<Integer> arr) {
-        System.out.println("ArrayList: " + Arrays.asList(arr).stream().map(Objects::toString).collect(Collectors.joining()));
+        displayArrList(arr);
 
         System.out.print("Value to find: ");
         Integer input = getInt();
-        if (!isMatch(arr, input)) {
+        if (!isMatchArrList(arr, input, false)) {
             //System.out.printf("%d is not in the ArrayList.%n", input);
+        } else {
+            System.out.printf("%d is in the ArrayList.%n", input);
         }
 
+        System.out.println();
         System.out.println("Result (if contains): " + arr.contains(input));
-    }
-
-    private static boolean isMatch(ArrayList<Integer> arr, Integer input) {
-        boolean isFound = false;
-        for (int i = 0; i < arr.size(); i++) {
-            if (arr.get(i) == input) {
-//                System.out.printf("%d is in slot %d.%n", input, i);
-                System.out.printf("%d is in the ArrayList.%n", input);
-                isFound = true;
-            }
-        }
-        return isFound;
     }
 }

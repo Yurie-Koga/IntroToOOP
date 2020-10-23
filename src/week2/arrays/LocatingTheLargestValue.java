@@ -15,12 +15,13 @@ public class LocatingTheLargestValue {
 
         displayArrMap(nums);
 
-        int[] result = getMaxValueOfArrWithIndex(nums);
-        System.out.printf("The largest value is %d%n", result[1]);
-        System.out.printf("It is in slot %d%n", result[0]);
+        int[] result = getMaxValueOfArr(nums);
+        if (result.length == 2) {
+            System.out.printf("The largest value is %d%n", result[1]);
+            System.out.printf("It is in slot %d%n", result[0]);
+        }
 
         System.out.println();
         System.out.printf("Result is: %d%n", Arrays.stream(nums).max().getAsInt());
-
     }
 }
