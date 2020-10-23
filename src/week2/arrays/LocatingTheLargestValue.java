@@ -15,7 +15,7 @@ public class LocatingTheLargestValue {
 
         displayArrMap(nums);
 
-        int[] result = getMaxValueOfArrWithIndex(nums, 1);
+        int[] result = getMaxValueOfArrWithIndex(nums);
         System.out.printf("The largest value is %d%n", result[1]);
         System.out.printf("It is in slot %d%n", result[0]);
 

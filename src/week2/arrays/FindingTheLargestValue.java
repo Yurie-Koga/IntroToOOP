@@ -15,7 +15,7 @@ public class FindingTheLargestValue {
 
         displayArrMap(nums);
 
-        int maxVal = getMaxValueOfArr(nums, 1);
+        int maxVal = getMaxValueOfArr(nums);
         System.out.printf("The largest value is %d%n", maxVal);
         System.out.printf("Result is: %d%n", Arrays.stream(nums).max().getAsInt());
     }

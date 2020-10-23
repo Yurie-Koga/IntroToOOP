@@ -1,5 +1,6 @@
 package week2;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -42,11 +43,10 @@ public class CommonMethods {
      * Return a max value of an array
      *
      * @param arr an array to look for a max value
-     * @param min the min value of the array
      * @return
      */
-    public static int getMaxValueOfArr(int[] arr, Integer min) {
-        int maxVal = min;
+    public static int getMaxValueOfArr(int[] arr) {
+        int maxVal = arr[0];
         for (int a : arr) {
             if (maxVal < a)
                 maxVal = a;
@@ -58,17 +58,26 @@ public class CommonMethods {
      * Return an index of array which is the max value of the array and the max value.
      *
      * @param arr an array to look for a max value
-     * @param min the min value of the array
      * @return an array of int with {index of max value, max value}
      */
-    public static int[] getMaxValueOfArrWithIndex(int[] arr, Integer min) {
-        int[] result = new int[]{0, min};  // index, max value
-        for (int i = 0; i < arr.length; i++) {
+    public static int[] getMaxValueOfArrWithIndex(int[] arr) {
+        int[] result = new int[]{0, arr[0]};  // index, max value
+        for (int i = 1; i < arr.length; i++) {
             if (result[1] < arr[i]) {
                 result[0] = i;
                 result[1] = arr[i];
             }
         }
         return result;
+    }
+
+
+
+    public static ArrayList<Integer> randomIntArrList(Integer size, Integer min, Integer max) {
+        ArrayList<Integer> arr = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            arr.add(new Random().nextInt(max - min + 1) + min);
+        }
+        return arr;
     }
 }
