@@ -18,7 +18,7 @@ public class QuestionValidation {
     }
 
     public static boolean isFin(Object input, String target) {
-        return (input.toString().equals(target.toLowerCase()));
+        return (input.toString().toLowerCase().equals(target.toLowerCase()));
     }
 
     public static boolean isGameOver(int steps) {
