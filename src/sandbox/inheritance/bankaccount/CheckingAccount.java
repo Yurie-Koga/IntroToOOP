@@ -18,4 +18,16 @@ public class CheckingAccount extends BankAccount {
     public void setLimit(long limit) {
         this.limit = limit;
     }
+
+    //////////////////////////////////////////////////////////
+    // 'protected' can be accessed from subclasses
+    //////////////////////////////////////////////////////////
+    public String accessToProtectedMethodDirect() {
+        return super.protectedMethod();
+    }
+
+    public String accessToProtectedMethod() {
+        return super.accessFromPublicMethod();
+    }
+
 }

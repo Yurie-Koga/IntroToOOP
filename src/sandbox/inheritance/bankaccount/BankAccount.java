@@ -57,4 +57,15 @@ public class BankAccount {
                 Objects.equals(accountNumber, that.accountNumber) &&
                 Objects.equals(balance, that.balance);
     }
+
+    //////////////////////////////////////////////////////////
+    // 'protected' can be accessed from superclass itself
+    //////////////////////////////////////////////////////////
+    protected String protectedMethod() {
+        return "You can access to protected";
+    }
+
+    public String accessFromPublicMethod() {
+        return protectedMethod();
+    }
 }

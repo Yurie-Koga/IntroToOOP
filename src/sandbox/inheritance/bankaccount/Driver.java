@@ -1,12 +1,15 @@
 package sandbox.inheritance.bankaccount;
 
+import sandbox.inheritance.outofbankaccount.NotInheritanceOutOfPackage;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class Driver {
     public static void main(String[] args) {
-        createObjects();
-        checkEquals();
+//        createObjects();
+//        checkEquals();
+        testProtected();
     }
 
     private static void createObjects() {
@@ -49,5 +52,32 @@ public class Driver {
         // if compare object values, they are same
         System.out.println("if equals bA and bB (as value): " + bA.equalsAsValue(bB));
         System.out.println("if equals bA and bC (as value): " + bA.equalsAsValue(bC));
+    }
+
+    private static void testProtected() {
+
+        BankAccount b1 = new BankAccount("bank1", "acct1", new BigDecimal(100));
+        CheckingAccount c1 = new CheckingAccount("bank2", "acct2", new BigDecimal(2_000.7), 10_000);
+
+        System.out.println("----- access within superclass -----");
+        System.out.println(b1.accessFromPublicMethod());
+        System.out.println(b1.protectedMethod());
+
+        System.out.println("----- access from subclass -----");
+        System.out.println(c1.accessFromPublicMethod());
+        System.out.println(c1.protectedMethod());
+
+        System.out.println("----- access by subclass method -----");
+        System.out.println(c1.accessToProtectedMethod());
+        System.out.println(c1.accessToProtectedMethodDirect());
+
+        System.out.println("----- access from out of inheritance -----");
+        NoTSubclassOfBankAccount a = new NoTSubclassOfBankAccount();
+        System.out.println(a.accessBAProtectedMethod());
+
+        System.out.println("----- access from out of package -----");
+        NotInheritanceOutOfPackage b = new NotInheritanceOutOfPackage();
+        System.out.println("Direct: " + b.accessFromOutOfPackage());
+        System.out.println("By Public Method: " + b.accessFromOutOfPackageByPublicMethod());
     }
 }
