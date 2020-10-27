@@ -1,6 +1,4 @@
-package oop.Inheritance;
-
-import java.util.Objects;
+package oop.inheritance;
 
 // One Super class (Parent) - Multiple subclasses (Children)
 // Subclass can have ONLY one Super class

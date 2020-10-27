@@ -1,4 +1,4 @@
-package oop.Inheritance;
+package oop.inheritance;
 
 public class Driver {
     public static void main(String[] args) {

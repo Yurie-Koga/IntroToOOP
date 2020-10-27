@@ -1,4 +1,4 @@
-package oop.Inheritance;
+package oop.inheritance;
 
 public class SavingAccount extends BankAccount {
     private int transact;

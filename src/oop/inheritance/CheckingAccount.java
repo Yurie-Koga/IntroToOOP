@@ -1,4 +1,4 @@
-package oop.Inheritance;
+package oop.inheritance;
 
 public class CheckingAccount extends BankAccount {
     private long limit;
