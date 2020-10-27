@@ -5,6 +5,7 @@ package oop.interfaces;
  */
 public class Caravan implements Habitable, Movable {
     private int location;
+    /* distance from 0 (home) to current location */
     private int maxCapacity;
 
     public Caravan(int location, int maxCapacity) {
