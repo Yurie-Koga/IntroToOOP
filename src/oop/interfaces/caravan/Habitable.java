@@ -1,4 +1,4 @@
-package oop.interfaces;
+package oop.interfaces.caravan;
 
 /**
  * How to use 'interface'
@@ -8,5 +8,5 @@ package oop.interfaces;
  */
 public interface Habitable {
     // this method must be overridden at 'implements' class
-    boolean canFit(int inhabitants);
+    boolean canFit(int inhabitants);    // = residents
 }

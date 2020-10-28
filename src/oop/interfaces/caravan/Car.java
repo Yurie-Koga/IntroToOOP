@@ -1,11 +1,15 @@
-package oop.interfaces;
+package oop.interfaces.caravan;
 
 // Subclass of Vehicle Class
 public class Car extends Vehicle {
     private int numOfSeats;
 
     public Car(String brand, int numOfSeats) {
-        super(brand);
+        this(0, brand, numOfSeats);
+    }
+
+    public Car(int fuel, String brand, int numOfSeats) {
+        super(fuel, brand);
         this.numOfSeats = numOfSeats;
     }
 
@@ -18,8 +22,7 @@ public class Car extends Vehicle {
             if (getFuel() >= distance) {
                 System.out.println("moving to the destination.");
             } else {
-                System.out.println("cannot reach to the destination.");
-                System.out.println("not enough fuel.");
+                System.out.println("cannot reach to the destination. not enough fuel.");
             }
             setFuel(getFuel() - distance);
         }

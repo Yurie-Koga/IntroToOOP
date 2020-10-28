@@ -1,6 +1,7 @@
-package oop.interfaces;
+package oop.interfaces.caravan;
 
 /**
+ * cannot inherit from multiple superclasses (House, Vehicle), so use multiple interfaces
  * can set multiple interfaces - don't forget override all methods from both interfaces
  */
 public class Caravan implements Habitable, Movable {
@@ -13,9 +14,26 @@ public class Caravan implements Habitable, Movable {
         this.maxCapacity = maxCapacity;
     }
 
+    public int getLocation() {
+        return location;
+    }
+
+    public void setLocation(int location) {
+        this.location = location;
+    }
+
+    public int getMaxCapacity() {
+        return maxCapacity;
+    }
+
+    public void setMaxCapacity(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
+    }
+
+    // override methods from interfaces
     @Override
     public boolean canFit(int inhabitants) {
-        return maxCapacity <= inhabitants;
+        return maxCapacity >= inhabitants;
     }
 
     @Override
