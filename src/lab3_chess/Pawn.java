@@ -7,23 +7,25 @@ public class Pawn extends Piece {
     private static final int VALUE_PAWN = 1;
     ///////////////////////////////////////////////////
 
-    boolean promoted;
-    Piece newPiece;
+    private boolean promoted;
+    private Piece newPiece;
 
     public Pawn() {
-        this(VALUE_PAWN, false, false, null);
+        this(false, false, null);
     }
 
-    public Pawn(int value, boolean isWhite, boolean promoted, Piece newPiece) {
-        super(value, isWhite);
+    public Pawn(boolean isWhite, boolean promoted, Piece newPiece) {
+        super(VALUE_PAWN, isWhite);
         this.promoted = promoted;
         this.newPiece = newPiece;
     }
 
     // not sure what they want..
     public void promote(Piece newPiece) {
-        promoted = true;
-        this.newPiece = newPiece;
+        if (!promoted) {
+            promoted = true;
+            this.newPiece = newPiece;
+        }
     }
 
     @Override

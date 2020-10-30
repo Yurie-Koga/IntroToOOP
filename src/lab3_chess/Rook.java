@@ -6,11 +6,11 @@ public class Rook extends Piece {
     ///////////////////////////////////////////////////
 
     public Rook() {
-        this(VALUE_ROOK, false);
+        this(false);
     }
 
-    public Rook(int value, boolean isWhite) {
-        super(value, isWhite);
+    public Rook(boolean isWhite) {
+        super(VALUE_ROOK, isWhite);
     }
 
     @Override

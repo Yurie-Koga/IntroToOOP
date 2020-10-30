@@ -6,11 +6,11 @@ public class King extends Piece {
     ///////////////////////////////////////////////////
 
     public King() {
-        this(VALUE_KING, false);
+        this(false);
     }
 
-    public King(int value, boolean isWhite) {
-        super(value, isWhite);
+    public King(boolean isWhite) {
+        super(VALUE_KING, isWhite);
     }
 
     @Override

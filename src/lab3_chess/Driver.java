@@ -36,12 +36,12 @@ public class Driver {
             p.move();
         }
 
-        // Pawns
-        Pawn p1 = new Pawn(1, true, true, new Queen());
-        Pawn p2 = new Pawn(1, true, false, null);
-        Pawn p3 = new Pawn(1, false, false, null);
-        Pawn p4 = new Pawn(1, false, true, new Queen());
-        Pawn p5 = new Pawn(1, true, true, new Knight());
+        // Pawns: set the same color with Pawn and a new piece since the location does not change
+        Pawn p1 = new Pawn(true, true, new Queen(true));
+        Pawn p2 = new Pawn(true, false, null);
+        Pawn p3 = new Pawn(false, false, null);
+        Pawn p4 = new Pawn(false, true, new Queen(false));
+        Pawn p5 = new Pawn(true, true, new Knight(true));
 
         // equals
         System.out.println("----- equals -----");

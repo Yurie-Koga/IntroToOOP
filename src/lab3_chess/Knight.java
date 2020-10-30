@@ -6,11 +6,11 @@ public class Knight extends Piece {
     ///////////////////////////////////////////////////
 
     public Knight() {
-        this(VALUE_KNIGHT, false);
+        this(false);
     }
 
-    public Knight(int value, boolean isWhite) {
-        super(value, isWhite);
+    public Knight(boolean isWhite) {
+        super(VALUE_KNIGHT, isWhite);
     }
 
     @Override

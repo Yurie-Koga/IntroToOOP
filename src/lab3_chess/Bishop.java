@@ -5,12 +5,11 @@ public class Bishop extends Piece {
     private static final int VALUE_BISHOP = 3;
     ///////////////////////////////////////////////////
 
-    public Bishop(){
-        this(VALUE_BISHOP, false);
+    public Bishop() { this(false);
     }
 
-    public Bishop(int value, boolean isWhite) {
-        super(value, isWhite);
+    public Bishop(boolean isWhite) {
+        super(VALUE_BISHOP, isWhite);
     }
 
     @Override
