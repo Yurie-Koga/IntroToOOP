@@ -89,7 +89,7 @@ public class ContactList {
     }
 
     /**
-     * Check if the contact exist by index
+     * Check if the contact exists by index
      *
      * @param indexOfContact
      * @return
