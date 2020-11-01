@@ -46,22 +46,3 @@ public class PhoneList {
         return Objects.equals(phones, phoneList.phones);
     }
 }
-
-//            if (!phones.get(i).toString().isEmpty() && !phones.get(i).toString().isBlank()) {
-/*
-* @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        boolean multple = false;
-        for (int i = 0; i < phones.size(); i++) {
-            if (!phones.get(i).getPhoneNumber().isEmpty() && !phones.get(i).getPhoneNumber().isBlank()) {
-                if (multple)
-                    sb.append(", ");
-                sb.append(phones.get(i));
-                if (i < phones.size() - 1)
-                    multple = true;
-            }
-        }
-        return sb.toString();
-    }
-* */

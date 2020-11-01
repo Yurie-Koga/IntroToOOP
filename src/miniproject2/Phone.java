@@ -29,10 +29,6 @@ public class Phone {
 
     @Override
     public String toString() {
-//        if (!phoneNumber.isEmpty() && !phoneNumber.isBlank())
-//            return phoneName + "=" + phoneNumber;
-//        else
-//            return "";
         return phoneName + "=" + phoneNumber;
     }
 
