@@ -49,8 +49,9 @@ public class MidtermExamQuestions {
 
     /**
      * Question: which line in the for loop causes an error?
-     * Answer: Line3
-     * Reason: ?????
+     * Answer: Line3 (this is a logical error, not a complie error)
+     * Reason: assigning a new object to an elements of array, it is equal to create a local valuable and set to it.
+     *  - it means nothing is applied to an elements of array.
      */
     static void question4() {
         Clock[][] allClocks = new Clock[][]{
