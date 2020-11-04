@@ -123,9 +123,15 @@ class MyArrayList implements List, RandomAccess {
         int newLen = c.size();
         if (newLen == 0)
             return false;
-        // ignore any cases (e.g. if needs to move)
+
         elementData = grow(size + index + newLen);
-        System.arraycopy(c.toArray(), 0, elementData, size + index, newLen);
+        System.out.println("grew size: " + Arrays.toString(elementData));
+        // move to insert elements
+        //  - seems better to use new Object
+        System.arraycopy(elementData, index, elementData, index+ newLen, size);
+        System.out.println("moved : " + Arrays.toString(elementData));
+        // insert
+        System.arraycopy(c.toArray(), 0, elementData, index, newLen);
         size += newLen;
         return true;
     }
