@@ -1,6 +1,7 @@
 package collections.list;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 // public class MyArrayList implements List, RandomAccess {
 class MyArrayList implements List, RandomAccess {
@@ -10,7 +11,18 @@ class MyArrayList implements List, RandomAccess {
 
     public MyArrayList() {
         elementData = new Object[DEFAULT_SIZE];
-//        size = DEFAULT_SIZE;
+    }
+
+    public MyArrayList(int initialCapacity) {
+        if (initialCapacity >= 0) {
+            elementData = new Object[initialCapacity];
+        } else {
+            throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
+        }
+    }
+
+    public MyArrayList(Collection c) {
+        elementData = c.toArray();
     }
 
     @Override
@@ -30,6 +42,7 @@ class MyArrayList implements List, RandomAccess {
 
     @Override
     public Iterator iterator() {
+        // no need to implement
         return null;
     }
 
@@ -39,9 +52,15 @@ class MyArrayList implements List, RandomAccess {
     }
 
     @Override
+    public Object[] toArray(Object[] a) {
+        // no need to implement
+        return new Object[0];
+    }
+
+    @Override
     public boolean add(Object o) {
         if (size == elementData.length) {
-            elementData = grow(elementData.length);
+            elementData = grow(size + 1);
         }
         elementData[size] = o;
         size++;
@@ -58,14 +77,14 @@ class MyArrayList implements List, RandomAccess {
         if (index == -1)
             return false;
 
-        Object[] newElement = new Object[size-1];
+        Object[] newElement = new Object[size - 1];
         int i = 0;
         while (i < index) {
             newElement[i] = elementData[i];
             i++;
         }
-        while(i < size) {
-            newElement[i] = elementData[i+1];
+        while (i < size) {
+            newElement[i] = elementData[i + 1];
             i++;
         }
         elementData = newElement;
@@ -73,8 +92,23 @@ class MyArrayList implements List, RandomAccess {
     }
 
     @Override
+    public boolean containsAll(Collection c) {
+        for (Object o : c) {
+            if (indexOf(o) < 0)
+                return false;
+        }
+        return true;
+    }
+
+    @Override
     public boolean addAll(Collection c) {
-        return false;
+        int newLen = c.size();
+        if (newLen == 0)
+            return false;
+        elementData = grow(size + newLen);
+        System.arraycopy(c.toArray(), 0, elementData, size, newLen);
+        size += newLen;
+        return true;
     }
 
     @Override
@@ -147,13 +181,5 @@ class MyArrayList implements List, RandomAccess {
         return false;
     }
 
-    @Override
-    public boolean containsAll(Collection c) {
-        return false;
-    }
 
-    @Override
-    public Object[] toArray(Object[] a) {
-        return new Object[0];
-    }
 }
