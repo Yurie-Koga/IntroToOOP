@@ -59,10 +59,12 @@ class MyArrayList implements List, RandomAccess {
 
     @Override
     public boolean add(Object o) {
+//        System.out.printf("object: %s, object.toString: %s%n", o, o.toString());
         if (size == elementData.length) {
             elementData = grow(size + 1);
         }
         elementData[size] = o;
+//        System.out.println(elementData[size].toString());
         size++;
         return true;
     }
@@ -76,24 +78,29 @@ class MyArrayList implements List, RandomAccess {
         int index = indexOf(o);
         if (index == -1)
             return false;
+//        System.out.println("found index: " + index);
 
         Object[] newElement = new Object[size - 1];
         int i = 0;
         while (i < index) {
             newElement[i] = elementData[i];
             i++;
+//            System.out.printf("[%d]: %s, next i: %d%n", i - 1, Arrays.toString(newElement), i);
         }
-        while (i < size) {
+        while (i < size - 1) {
             newElement[i] = elementData[i + 1];
             i++;
+//            System.out.printf("[%d]: %s, next i: %d%n", i - 1, Arrays.toString(newElement), i);
         }
+
         elementData = newElement;
+        size--;
         return true;
     }
 
     @Override
     public boolean containsAll(Collection c) {
-        for (Object o : c) {
+        for (Object o : c.toArray()) {
             if (indexOf(o) < 0)
                 return false;
         }
@@ -113,6 +120,30 @@ class MyArrayList implements List, RandomAccess {
 
     @Override
     public boolean addAll(int index, Collection c) {
+        int newLen = c.size();
+        if (newLen == 0)
+            return false;
+        // ignore any cases (e.g. if needs to move)
+        elementData = grow(size + index + newLen);
+        System.arraycopy(c.toArray(), 0, elementData, size + index, newLen);
+        size += newLen;
+        return true;
+    }
+
+    @Override
+    public boolean removeAll(Collection c) {
+        if (c == null)
+            return false;
+        for (Object o : c.toArray()) {
+            if (contains(o)) {
+                remove(o);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean retainAll(Collection c) {
         return false;
     }
 
@@ -123,7 +154,7 @@ class MyArrayList implements List, RandomAccess {
 
     @Override
     public Object get(int index) {
-        return null;
+        return elementData[index];
     }
 
     @Override
@@ -170,16 +201,4 @@ class MyArrayList implements List, RandomAccess {
     public List subList(int fromIndex, int toIndex) {
         return null;
     }
-
-    @Override
-    public boolean retainAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection c) {
-        return false;
-    }
-
-
 }
