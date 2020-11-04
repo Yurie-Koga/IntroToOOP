@@ -1,6 +1,4 @@
-package collections.list;
-
-import miniproject1.Question;
+package collections.queue;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -90,12 +88,22 @@ public class QueueExamples {
      * [“a”, “b”, “c”] becomes [“a”, “b”, “c”, “c”, “b”, “a”]
      */
     private static void mirror(Queue<String> q) {
+        // stack : reverse the order
+        // queue : keep the original order
         Deque<String> stack = new ArrayDeque<>();
         int len = q.size();
         for (int i = 0; i < len; i++) {
-            stack.push(q.poll());
+            String e = q.poll();
+            q.offer(e);
+            stack.push(e);
             System.out.printf("[%d]: Queue: %s, Stack: %s%n", i, q, stack);
         }
-
+        // add reversed elements to queue
+        int i = 0;
+        while (!stack.isEmpty()) {
+            q.offer(stack.pop());
+            System.out.printf("[%d]: Queue: %s, Stack: %s%n", i, q, stack);
+            i++;
+        }
     }
 }

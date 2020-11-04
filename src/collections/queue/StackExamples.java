@@ -1,4 +1,4 @@
-package collections.list;
+package collections.queue;
 
 import java.lang.reflect.Array;
 import java.util.*;
