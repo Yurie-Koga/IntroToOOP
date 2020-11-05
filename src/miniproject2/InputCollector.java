@@ -203,37 +203,45 @@ public class InputCollector {
      * Remove a contact if it exists
      */
     private void removeContact() {
-        System.out.println(contactList);
-        int index = getUserInputInt("Enter the index of the contact to remove: ", true);
-        String result = contactList.remove(index);
+        if(contactList.size() == 0){
+            System.out.println("No data in the list.");
+        } else {
+            System.out.println(contactList);
+            int index = getUserInputInt("Enter the index of the contact to remove: ", true);
+            String result = contactList.remove(index);
 
-        if (!result.isBlank() && !result.isEmpty())
-            System.out.println("Successfully removed " + result + ".");
-        System.out.println(contactList);
+            if (!result.isBlank() && !result.isEmpty())
+                System.out.println("Successfully removed " + result + ".");
+            System.out.println(contactList);
+        }
     }
 
     /**
      * Update a contact
      */
     private void updateContact() {
-        System.out.println(contactList);
-        int index = 0;
-        while (true) {
-            index = getUserInputInt("Enter the index of the contact to update: ", true);
-            if (!contactList.isExist(index)) {
-                System.out.println("Invalid Input. Enter number between 0 to " + contactList.getLastIndex());
-                continue;
+        if(contactList.size() == 0){
+            System.out.println("No data in the list.");
+        } else {
+            System.out.println(contactList);
+            int index = 0;
+            while (true) {
+                index = getUserInputInt("Enter the index of the contact to update: ", true);
+                if (!contactList.isExist(index)) {
+                    System.out.println("Invalid Input. Enter number between 0 to " + contactList.getLastIndex());
+                    continue;
+                }
+                break;
             }
-            break;
+
+            String name = getUserInputString("Enter Name: ", true);
+            PhoneList phoneList = getUserInputPhones();
+            String email = getUserInputString("Enter Email: ", false);
+
+            if (contactList.update(index, new Contact(name, phoneList, email)))
+                System.out.println("Successfully updated.");
+            System.out.println(contactList);
         }
-
-        String name = getUserInputString("Enter Name: ", true);
-        PhoneList phoneList = getUserInputPhones();
-        String email = getUserInputString("Enter Email: ", false);
-
-        if (contactList.update(index, new Contact(name, phoneList, email)))
-            System.out.println("Successfully updated.");
-        System.out.println(contactList);
     }
 
     /**

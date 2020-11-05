@@ -4,26 +4,24 @@ import java.util.*;
 
 /**
  * 1. size vs length :
- *  - size :
- *      - the number of elements.
- *      - not updated when grow elementData.
- *      - updated when add/remove an element from elementData.
- *  - length :
- *      - actual array's length.
- *      - updated when grow elementData.
- *      - counting the number of elements after grow size and before set value to elementData.
- *  - should return ArrayList with the number of size, not the number of length:
- *      - if the capacity = 5 and the number of elements = 2:
- *          size(): 2 -- [1, 2]
- *          length: 5 -- [1, 2, null, null, null]
- *          toArray(): [1, 2] <-- return only the actual elements
+ * - size :
+ * - the number of elements.
+ * - not updated when grow elementData.
+ * - updated when add/remove an element from elementData.
+ * - length :
+ * - actual array's length.
+ * - updated when grow elementData.
+ * - counting the number of elements after grow size and before set value to elementData.
+ * - should return ArrayList with the number of size, not the number of length:
+ * - if the capacity = 5 and the number of elements = 2:
+ * size(): 2 -- [1, 2]
+ * length: 5 -- [1, 2, null, null, null]
+ * toArray(): [1, 2] <-- return only the actual elements
  * 2. Arrays.toString(array) :
- *  - return all elements with the length
- *  - so need to be 'Arrays.toString(ArrayList.toArray())' to output only the actual elements.
+ * - return all elements with the length
+ * - so need to be 'Arrays.toString(ArrayList.toArray())' to output only the actual elements.
  */
-
-// public class MyArrayList implements List, RandomAccess {
-class MyArrayList implements List, RandomAccess {
+public class MyArrayList implements List, RandomAccess {
     private static final int DEFAULT_SIZE = 10;
     private Object[] elementData;
     private int size;
@@ -42,6 +40,19 @@ class MyArrayList implements List, RandomAccess {
 
     public MyArrayList(Collection c) {
         elementData = c.toArray();
+    }
+
+    /**
+     * Return elements in a format of '[1, 2, 3, 4]'
+     * Override toString() in Object class which returns in a format 'collections.list.MyArrayList@3e3abc88'
+     * @return
+     */
+    @Override
+    public String toString() {
+        return toString(toArray());
+    }
+    public String toString(Object[] o) {
+        return Arrays.toString(o);
     }
 
     @Override
@@ -67,6 +78,7 @@ class MyArrayList implements List, RandomAccess {
 
     /**
      * Return as an array with the actual elements, not the length
+     *
      * @return
      */
     @Override
@@ -86,11 +98,11 @@ class MyArrayList implements List, RandomAccess {
 //        System.out.printf("size: %d, length: %d%n", size, elementData.length);
 //        System.out.println("elementData: " + Arrays.toString(elementData));
         if (size == elementData.length) {
-            System.out.println("before grow length: " + Arrays.toString(elementData));
-            System.out.println("before grow length toArray: " + Arrays.toString(toArray()));
+//            System.out.println("before grow length: " + Arrays.toString(elementData));
+//            System.out.println("before grow length toArray: " + Arrays.toString(toArray()));
             elementData = grow(size + 1);
-            System.out.println("after grew length: " + Arrays.toString(elementData));
-            System.out.println("after grew length toArray: " + Arrays.toString(toArray()));
+//            System.out.println("after grew length: " + Arrays.toString(elementData));
+//            System.out.println("after grew length toArray: " + Arrays.toString(toArray()));
         }
         elementData[size] = o;
 //        System.out.println("added element: " +elementData[size].toString());
@@ -108,20 +120,28 @@ class MyArrayList implements List, RandomAccess {
         int index = indexOf(o);
         if (index == -1)
             return false;
-//        System.out.println("found index: " + index);
+        System.out.println("found index: " + index);
 
-        Object[] newElement = new Object[size - 1];
+        Object[] newElement = new Object[elementData.length];
+        System.out.println("original: " + Arrays.toString(elementData));
+        System.out.println("new     : " + Arrays.toString(newElement));
         int i = 0;
-        while (i < index) {
-            newElement[i] = elementData[i];
-            i++;
-//            System.out.printf("[%d]: %s, next i: %d%n", i - 1, Arrays.toString(newElement), i);
-        }
-        while (i < size - 1) {
-            newElement[i] = elementData[i + 1];
-            i++;
-//            System.out.printf("[%d]: %s, next i: %d%n", i - 1, Arrays.toString(newElement), i);
-        }
+        System.arraycopy(elementData, 0, newElement, 0, index);
+        System.out.println("original: " + Arrays.toString(elementData));
+        System.out.println("new     : " + Arrays.toString(newElement));
+        System.arraycopy(elementData, index + 1, newElement, index, newElement.length - index -1);
+        System.out.println("original: " + Arrays.toString(elementData));
+        System.out.println("new     : " + Arrays.toString(newElement));
+//        while (i < index) {
+//            newElement[i] = elementData[i];
+//            i++;
+////            System.out.printf("[%d]: %s, next i: %d%n", i - 1, Arrays.toString(newElement), i);
+//        }
+//        while (i < size - 1) {
+//            newElement[i] = elementData[i + 1];
+//            i++;
+////            System.out.printf("[%d]: %s, next i: %d%n", i - 1, Arrays.toString(newElement), i);
+//        }
 
         elementData = newElement;
         size--;

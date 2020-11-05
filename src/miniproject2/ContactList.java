@@ -25,6 +25,9 @@ public class ContactList {
         contacts.clear();
     }
 
+    public int size() {
+        return contacts.size();
+    }
     /**
      * Add a new contact to Contact List
      *

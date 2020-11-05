@@ -13,7 +13,7 @@ public class DriverArrayList {
 //        testContains();
 //        testToArray();
 
-//        testRemoveObj();
+        testRemoveObj();
 
 //        testRemoveAll();
 //        testContainsAll();
@@ -32,7 +32,8 @@ public class DriverArrayList {
         // toString() is in AbstractCollection class
         //  - ArrayList extends AbstractList<E> --> toString() using Iterator<E>
         //  - ArrayList has nested class 'Iterator<E>'
-        System.out.println(a.toString());
+//        System.out.println(a.toString());
+        System.out.println(a);
 
         System.out.println("----- MyArrayList -----");
         MyArrayList b = new MyArrayList();
@@ -41,7 +42,16 @@ public class DriverArrayList {
         b.add("test");
         // return: collections.list.MyArrayList@3e3abc88
         // toString() is in Object class
-        System.out.println(b.toString());
+//        System.out.println(b.toString());
+        // need to access w/ 'toArray()'
+//        for (Object c : b.toArray()) {
+//            System.out.print(c + " ");
+//        }
+
+//        for (int i = 0; i < b.size(); i++) {
+//            System.out.print(b.get(i) + " ");
+//        }
+        System.out.println(b);  // overrode toString() in MyArrayList class
     }
 
 
@@ -49,40 +59,46 @@ public class DriverArrayList {
         System.out.println("----- ArrayList -----");
         ArrayList<Character> arrList = new ArrayList<>();
         System.out.println("size: " + arrList.size());
+        System.out.println(arrList);
 
         System.out.println("----- MyArrayList -----");
         MyArrayList myArrList = new MyArrayList();
         System.out.println("size: " + myArrList.size());
+        System.out.println(myArrList);
     }
 
     private static void testIsEmpty() {
         System.out.println("----- ArrayList -----");
         ArrayList<Character> arrList = new ArrayList<>();
         System.out.println("isEmpty: " + arrList.isEmpty());
+        System.out.println(arrList);
+        arrList.add('a');
+        System.out.println("isEmpty: " + arrList.isEmpty());
+        System.out.println(arrList);
 
         System.out.println("----- MyArrayList -----");
         MyArrayList myArrList = new MyArrayList();
         System.out.println("isEmpty: " + myArrList.isEmpty());
+        System.out.println(myArrList);
+        myArrList.add('a');
+        System.out.println("isEmpty: " + myArrList.isEmpty());
+        System.out.println(myArrList);
     }
 
     private static void testAdd() {
         System.out.println("----- ArrayList -----");
         ArrayList<Character> arrList = new ArrayList<>();
         arrList.add('a');
+        arrList.add('b');
         System.out.println("size: " + arrList.size());
-        // able to access w/o 'toArray()'
-//        for (Character c : arrList) {
-//            System.out.print(c + " ");
-//        }
-        for (int i = 0; i < arrList.size(); i++) {
-            System.out.print(arrList.get(i) + " ");
-        }
-        System.out.println();
+        System.out.println(arrList);
 
         System.out.println("----- MyArrayList -----");
         MyArrayList myArrList = new MyArrayList();
         myArrList.add('a');
         myArrList.add('b');
+        System.out.println("size: " + myArrList.size());
+        System.out.println(myArrList);
         myArrList.add('c');
         myArrList.add('d');
         myArrList.add('e');
@@ -93,15 +109,7 @@ public class DriverArrayList {
         myArrList.add('j');
         myArrList.add('k');
         System.out.println("size: " + myArrList.size());
-        // need to access w/ 'toArray()'
-//        for (Object c : myArrList.toArray()) {
-//            System.out.print(c + " ");
-//        }
-
-        for (int i = 0; i < myArrList.size(); i++) {
-            System.out.print(myArrList.get(i) + " ");
-        }
-        System.out.println();
+        System.out.println(myArrList);
     }
 
     private static void testContains() {
@@ -112,6 +120,7 @@ public class DriverArrayList {
         arrList.add('c');
         System.out.println("contains 'a': " + arrList.contains('a'));
         System.out.println("contains 'f': " + arrList.contains('f'));
+        System.out.println(arrList);
 
         System.out.println("----- MyArrayList -----");
         MyArrayList myArrList = new MyArrayList();
@@ -120,6 +129,7 @@ public class DriverArrayList {
         myArrList.add('f');
         System.out.println("contains 'e': " + myArrList.contains('e'));
         System.out.println("contains 'a': " + myArrList.contains('a'));
+        System.out.println(myArrList);
     }
 
     private static void testToArray() {
@@ -130,9 +140,10 @@ public class DriverArrayList {
         arrList.add('c');
         arrList.add('d');
         arrList.add('e');
-        System.out.println("ArrayList: " + arrList);
+        System.out.println("ArrayList print as Array: " + arrList);
         Object[] arr = arrList.toArray();
-        System.out.println("Array: " + Arrays.toString(arr));
+        System.out.println("Array: " + arr);
+        System.out.println("Arrays.toString(): " + Arrays.toString(arr));
 
         System.out.println("----- MyArrayList -----");
         MyArrayList myArrList = new MyArrayList();
@@ -141,9 +152,10 @@ public class DriverArrayList {
         myArrList.add('h');
         myArrList.add('i');
         myArrList.add('j');
-        System.out.println("ArrayList: " + myArrList);
+        System.out.println("ArrayList print as Array: " + myArrList);
         Object[] myArr = myArrList.toArray();
-        System.out.println("Array: " + Arrays.toString(myArr));
+        System.out.println("Array: " + myArr);
+        System.out.println("Arrays.toString(): " + Arrays.toString(myArr));
     }
 
     private static void testRemoveObj() {
@@ -154,14 +166,16 @@ public class DriverArrayList {
         arrList.add('c');
         arrList.add('d');
         arrList.add('e');
-        System.out.println("Before remove: " + Arrays.toString(arrList.toArray()));
+        System.out.println(arrList);
         Character c = 'c';
         arrList.remove(c);
-        System.out.printf("After remove '%s': %s%n", c.toString(), Arrays.toString(arrList.toArray()));
-        System.out.println("Before remove: " + Arrays.toString(arrList.toArray()));
+        System.out.printf("removed : %s %s%n", c.toString(), arrList);
         c = 'e';
         arrList.remove(c);
-        System.out.printf("After remove '%s': %s%n", c.toString(), Arrays.toString(arrList.toArray()));
+        System.out.printf("removed : %s %s%n", c.toString(), arrList);
+        c = 'z';
+        arrList.remove(c);
+        System.out.printf("removed : %s %s%n", c.toString(), arrList);
 
         System.out.println("----- MyArrayList -----");
         MyArrayList myArrList = new MyArrayList();
@@ -170,16 +184,16 @@ public class DriverArrayList {
         myArrList.add('h');
         myArrList.add('i');
         myArrList.add('j');
-        System.out.println("Before remove: " + Arrays.toString(myArrList.toArray()));
-        System.out.println("Before remove: " + myArrList);
-        System.out.println("Before remove: " + myArrList.toString());
+        System.out.println(myArrList);
         Object obj = 'h';
         myArrList.remove(obj);
-        System.out.printf("After remove '%s': %s%n", obj, Arrays.toString(myArrList.toArray()));
-        System.out.println("Before remove: " + Arrays.toString(myArrList.toArray()));
-        obj = 'j';
-        myArrList.remove(obj);
-        System.out.printf("After remove '%s': %s%n", obj, Arrays.toString(myArrList.toArray()));
+//        System.out.printf("removed : %s %s%n", obj.toString(), myArrList);
+//        obj = 'j';
+//        myArrList.remove(obj);
+//        System.out.printf("removed : %s %s%n", obj.toString(), myArrList);
+//        obj = 'k';
+//        myArrList.remove(obj);
+//        System.out.printf("removed : %s %s%n", obj.toString(), myArrList);
     }
 
     private static void testRemoveAll() {
