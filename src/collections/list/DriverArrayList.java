@@ -3,20 +3,47 @@ package collections.list;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Driver {
+public class DriverArrayList {
     public static void main(String[] args) {
+//        diffArrayListVsMyArrayList();
+
 //        testSize();
 //        testIsEmpty();
 //        testAdd();
 //        testContains();
 //        testToArray();
+
 //        testRemoveObj();
 
 //        testRemoveAll();
 //        testContainsAll();
 //        testAddAll();
-        testAddAllIndex();
+//        testAddAllIndex();
     }
+
+    private static void diffArrayListVsMyArrayList() {
+        System.out.println("========== toString() ==========");
+        System.out.println("----- ArrayList -----");
+        ArrayList<String> a = new ArrayList<>();
+        a.add("teest");
+        a.add("teest");
+        a.add("teest");
+        // return: [teest, teest, teest]
+        // toString() is in AbstractCollection class
+        //  - ArrayList extends AbstractList<E> --> toString() using Iterator<E>
+        //  - ArrayList has nested class 'Iterator<E>'
+        System.out.println(a.toString());
+
+        System.out.println("----- MyArrayList -----");
+        MyArrayList b = new MyArrayList();
+        b.add("test");
+        b.add("test");
+        b.add("test");
+        // return: collections.list.MyArrayList@3e3abc88
+        // toString() is in Object class
+        System.out.println(b.toString());
+    }
+
 
     private static void testSize() {
         System.out.println("----- ArrayList -----");
@@ -56,6 +83,15 @@ public class Driver {
         MyArrayList myArrList = new MyArrayList();
         myArrList.add('a');
         myArrList.add('b');
+        myArrList.add('c');
+        myArrList.add('d');
+        myArrList.add('e');
+        myArrList.add('f');
+        myArrList.add('g');
+        myArrList.add('h');
+        myArrList.add('i');
+        myArrList.add('j');
+        myArrList.add('k');
         System.out.println("size: " + myArrList.size());
         // need to access w/ 'toArray()'
 //        for (Object c : myArrList.toArray()) {
@@ -135,6 +171,8 @@ public class Driver {
         myArrList.add('i');
         myArrList.add('j');
         System.out.println("Before remove: " + Arrays.toString(myArrList.toArray()));
+        System.out.println("Before remove: " + myArrList);
+        System.out.println("Before remove: " + myArrList.toString());
         Object obj = 'h';
         myArrList.remove(obj);
         System.out.printf("After remove '%s': %s%n", obj, Arrays.toString(myArrList.toArray()));

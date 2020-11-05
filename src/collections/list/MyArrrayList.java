@@ -1,7 +1,26 @@
 package collections.list;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
+/**
+ * 1. size vs length :
+ *  - size :
+ *      - the number of elements.
+ *      - not updated when grow elementData.
+ *      - updated when add/remove an element from elementData.
+ *  - length :
+ *      - actual array's length.
+ *      - updated when grow elementData.
+ *      - counting the number of elements after grow size and before set value to elementData.
+ *  - should return ArrayList with the number of size, not the number of length:
+ *      - if the capacity = 5 and the number of elements = 2:
+ *          size(): 2 -- [1, 2]
+ *          length: 5 -- [1, 2, null, null, null]
+ *          toArray(): [1, 2] <-- return only the actual elements
+ * 2. Arrays.toString(array) :
+ *  - return all elements with the length
+ *  - so need to be 'Arrays.toString(ArrayList.toArray())' to output only the actual elements.
+ */
 
 // public class MyArrayList implements List, RandomAccess {
 class MyArrayList implements List, RandomAccess {
@@ -46,6 +65,10 @@ class MyArrayList implements List, RandomAccess {
         return null;
     }
 
+    /**
+     * Return as an array with the actual elements, not the length
+     * @return
+     */
     @Override
     public Object[] toArray() {
         return Arrays.copyOf(elementData, size);
@@ -60,11 +83,18 @@ class MyArrayList implements List, RandomAccess {
     @Override
     public boolean add(Object o) {
 //        System.out.printf("object: %s, object.toString: %s%n", o, o.toString());
+//        System.out.printf("size: %d, length: %d%n", size, elementData.length);
+//        System.out.println("elementData: " + Arrays.toString(elementData));
         if (size == elementData.length) {
+            System.out.println("before grow length: " + Arrays.toString(elementData));
+            System.out.println("before grow length toArray: " + Arrays.toString(toArray()));
             elementData = grow(size + 1);
+            System.out.println("after grew length: " + Arrays.toString(elementData));
+            System.out.println("after grew length toArray: " + Arrays.toString(toArray()));
         }
         elementData[size] = o;
-//        System.out.println(elementData[size].toString());
+//        System.out.println("added element: " +elementData[size].toString());
+//        System.out.println("elementData: " + Arrays.toString(elementData));
         size++;
         return true;
     }
@@ -121,15 +151,26 @@ class MyArrayList implements List, RandomAccess {
     @Override
     public boolean addAll(int index, Collection c) {
         int newLen = c.size();
-        if (newLen == 0)
+        if (c.size() == 0) {
             return false;
+        }
+        // [1 2] <- add [3 4] = [1 3 4 2]   : 2+3=4
+        // [1 2] <- add [3 4 5 6] = [1 3 4 5 6 2]: 2+4=6
+//        int newLen = size + c.size();
 
-        elementData = grow(size + index + newLen);
+        elementData = grow(size + newLen);
         System.out.println("grew size: " + Arrays.toString(elementData));
+        Object[] newElementData = new Object[size + newLen];
         // move to insert elements
         //  - seems better to use new Object
-        System.arraycopy(elementData, index, elementData, index+ newLen, size);
-        System.out.println("moved : " + Arrays.toString(elementData));
+        System.arraycopy(elementData, 0, newElementData, 0, size - index);
+        System.out.println("moved1 : " + Arrays.toString(newElementData));
+        // so here, should keep the resized size!!
+        System.arraycopy(elementData, index, newElementData, index + newLen, size - index);
+        System.out.println("moved2 : " + Arrays.toString(newElementData));
+        // inside the array, should have null elements with actual resized size.
+        // but when you print, no need to print out null elements
+
         // insert
         System.arraycopy(c.toArray(), 0, elementData, index, newLen);
         size += newLen;
