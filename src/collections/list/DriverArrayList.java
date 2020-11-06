@@ -13,7 +13,7 @@ public class DriverArrayList {
 //        testContains();
 //        testToArray();
 
-        testRemoveObj();
+//        testRemoveObj();
 
 //        testRemoveAll();
 //        testContainsAll();
@@ -166,6 +166,8 @@ public class DriverArrayList {
         arrList.add('c');
         arrList.add('d');
         arrList.add('e');
+        arrList.add('t');
+        arrList.add('e');
         System.out.println(arrList);
         Character c = 'c';
         arrList.remove(c);
@@ -184,16 +186,18 @@ public class DriverArrayList {
         myArrList.add('h');
         myArrList.add('i');
         myArrList.add('j');
+        myArrList.add('t');
+        myArrList.add('j');
         System.out.println(myArrList);
         Object obj = 'h';
         myArrList.remove(obj);
-//        System.out.printf("removed : %s %s%n", obj.toString(), myArrList);
-//        obj = 'j';
-//        myArrList.remove(obj);
-//        System.out.printf("removed : %s %s%n", obj.toString(), myArrList);
-//        obj = 'k';
-//        myArrList.remove(obj);
-//        System.out.printf("removed : %s %s%n", obj.toString(), myArrList);
+        System.out.printf("removed : %s %s%n", obj.toString(), myArrList);
+        obj = 'j';
+        myArrList.remove(obj);
+        System.out.printf("removed : %s %s%n", obj.toString(), myArrList);
+        obj = 'k';
+        myArrList.remove(obj);
+        System.out.printf("removed : %s %s%n", obj.toString(), myArrList);
     }
 
     private static void testRemoveAll() {
@@ -208,10 +212,12 @@ public class DriverArrayList {
         ArrayList<Character> arrList2 = new ArrayList<>();
         arrList2.add('d');  // no need to be the same order
         arrList2.add('b');
+        arrList2.add('z');
 
-        System.out.println(arrList1);
+        System.out.println("before:  " + arrList1);
         arrList1.removeAll(arrList2);
-        System.out.println(arrList1);
+        System.out.println("removed: " + arrList2);
+        System.out.println("after :  " + arrList1);
 
 
         System.out.println("----- MyArrayList -----");
@@ -225,10 +231,12 @@ public class DriverArrayList {
         MyArrayList myArrList2 = new MyArrayList();
         myArrList2.add('d');
         myArrList2.add('b');
+        myArrList2.add('z');
 
-        System.out.println(Arrays.toString(myArrList1.toArray()));
+        System.out.println("before:  " + myArrList1);
         myArrList1.removeAll(myArrList2);
-        System.out.println(Arrays.toString(myArrList1.toArray()));
+        System.out.println("removed: " + myArrList2);
+        System.out.println("after :  " + myArrList1);
     }
 
     private static void testContainsAll() {
@@ -239,22 +247,21 @@ public class DriverArrayList {
         arrList1.add('c');
         arrList1.add('d');
         arrList1.add('e');
+        System.out.printf("ArrayList1 : %s%n", arrList1);
 
         ArrayList<Character> arrList2 = new ArrayList<>();
         arrList2.add('d');  // no need to be the same order
         arrList2.add('b');
-
-        System.out.println("ArrayList1: " + arrList1);
-        System.out.println("ArrayList2: " + arrList2);
-        System.out.println("contains all: " + arrList1.containsAll(arrList2));
+        System.out.printf("containsAll: %s --> %s%n", arrList2, arrList1.containsAll(arrList2));
 
         ArrayList<Character> arrList3 = new ArrayList<>();
-        arrList3.add('t');
+        arrList3.add('a');
         arrList3.add('z');
+        System.out.printf("containsAll: %s --> %s%n", arrList3, arrList1.containsAll(arrList3));
 
-        System.out.println("ArrayList1: " + arrList1);
-        System.out.println("ArrayList3: " + arrList3);
-        System.out.println("contains all: " + arrList1.containsAll(arrList3));
+        ArrayList<Character> arrList4 = new ArrayList<>();
+        System.out.printf("containsAll: %s --> %s%n", arrList4, arrList1.containsAll(arrList4));
+
 
         System.out.println("----- MyArrayList -----");
         MyArrayList myArrList1 = new MyArrayList();
@@ -263,22 +270,20 @@ public class DriverArrayList {
         myArrList1.add('c');
         myArrList1.add('d');
         myArrList1.add('e');
+        System.out.println("ArrayList1: " + myArrList1);
 
         MyArrayList myArrList2 = new MyArrayList();
         myArrList2.add('d');
         myArrList2.add('b');
-
-        System.out.println("ArrayList1: " + Arrays.toString(myArrList1.toArray()));
-        System.out.println("ArrayList2: " + Arrays.toString(myArrList2.toArray()));
-        System.out.println("contains all: " + myArrList1.containsAll(myArrList2));
+        System.out.printf("containsAll: %s --> %s%n", myArrList2, myArrList1.containsAll(myArrList2));
 
         MyArrayList myArrList3 = new MyArrayList();
-        myArrList3.add('t');
+        myArrList3.add('a');
         myArrList3.add('z');
+        System.out.printf("containsAll: %s --> %s%n", myArrList3, myArrList1.containsAll(myArrList3));
 
-        System.out.println("ArrayList1: " + Arrays.toString(myArrList1.toArray()));
-        System.out.println("ArrayList3: " + Arrays.toString(myArrList3.toArray()));
-        System.out.println("contains all: " + myArrList1.containsAll(myArrList3));
+        MyArrayList myArrList4 = new MyArrayList();
+        System.out.printf("containsAll: %s --> %s%n", myArrList4, myArrList1.containsAll(myArrList4));
     }
 
     private static void testAddAll() {
@@ -286,30 +291,47 @@ public class DriverArrayList {
         ArrayList<Character> arrList1 = new ArrayList<>();
         arrList1.add('a');
         arrList1.add('b');
+        System.out.println("ArrayList1:   " + arrList1);
 
         ArrayList<Character> arrList2 = new ArrayList<>();
         arrList2.add('c');
         arrList2.add('d');
-
-        System.out.println("ArrayList1: " + arrList1);
-        System.out.println("ArrayList2: " + arrList2);
+        System.out.println("ArrayList2:   " + arrList2);
         arrList1.addAll(arrList2);
         System.out.println("added 2 to 1: " + arrList1);
 
+        ArrayList<Character> arrList3 = new ArrayList<>();
+        System.out.println("ArrayList2:   " + arrList3);
+        arrList1.addAll(arrList3);
+        System.out.println("added 2 to 1: " + arrList1);
 
         System.out.println("----- MyArrayList -----");
         MyArrayList myArrList1 = new MyArrayList();
         myArrList1.add('a');
         myArrList1.add('b');
+        System.out.println("ArrayList1:   " + myArrList1);
 
         MyArrayList myArrList2 = new MyArrayList();
         myArrList2.add('c');
         myArrList2.add('d');
-
-        System.out.println("ArrayList1: " + Arrays.toString(myArrList1.toArray()));
-        System.out.println("ArrayList2: " + Arrays.toString(myArrList2.toArray()));
+        System.out.println("ArrayList2:   " + myArrList2);
         myArrList1.addAll(myArrList2);
-        System.out.println("added 2 to 1: " + Arrays.toString(myArrList1.toArray()));
+        System.out.println("added 2 to 1: " + myArrList1);
+        myArrList2.add('d');
+        myArrList2.add('d');
+        myArrList2.add('d');
+        myArrList2.add('d');
+        myArrList2.add('d');
+        myArrList2.add('d');
+        myArrList2.add('d');
+        System.out.println("ArrayList2:   " + myArrList2);
+        myArrList1.addAll(myArrList2);
+        System.out.println("added 2 to 1: " + myArrList1);
+
+        MyArrayList myArrList3 = new MyArrayList();
+        System.out.println("ArrayList2:   " + myArrList3);
+        myArrList1.addAll(myArrList3);
+        System.out.println("added 2 to 1: " + myArrList1);
     }
 
     private static void testAddAllIndex() {
@@ -317,29 +339,64 @@ public class DriverArrayList {
         ArrayList<Character> arrList1 = new ArrayList<>();
         arrList1.add('a');
         arrList1.add('b');
+        System.out.println("ArrayList1:   " + arrList1);
 
         ArrayList<Character> arrList2 = new ArrayList<>();
         arrList2.add('c');
         arrList2.add('d');
-
-        System.out.println("ArrayList1: " + arrList1);
-        System.out.println("ArrayList2: " + arrList2);
+        System.out.println("ArrayList2:   " + arrList2);
         arrList1.addAll(1, arrList2);
         System.out.println("added 2 to 1: " + arrList1);
+        arrList2.add('d');
+        arrList2.add('d');
+        arrList2.add('y');
+        System.out.println("ArrayList2:   " + arrList2);
+        arrList1.addAll(4, arrList2);
+        System.out.println("added 2 to 1: " + arrList1);
 
+//        ArrayList<Character> arrList3 = new ArrayList<>();
+//        arrList3.add('z');
+//        System.out.println("ArrayList2:   " + arrList3);
+        // throw exception if index > ArrayList.size()
+//        arrList1.addAll(10, arrList3);
+//        System.out.println("added 2 to 1: " + arrList1);
+
+//        ArrayList<Character> arrList3 = new ArrayList<>();
+//        arrList3.add('x');
+//        System.out.println("ArrayList2:   " + arrList3);
+//        arrList1.addAll(100, arrList3);
+//        System.out.println("added 2 to 1: " + arrList1);
 
         System.out.println("----- MyArrayList -----");
         MyArrayList myArrList1 = new MyArrayList();
         myArrList1.add('a');
         myArrList1.add('b');
+        System.out.println("ArrayList1:   " + myArrList1);
 
         MyArrayList myArrList2 = new MyArrayList();
         myArrList2.add('c');
         myArrList2.add('d');
-
-        System.out.println("ArrayList1: " + Arrays.toString(myArrList1.toArray()));
-        System.out.println("ArrayList2: " + Arrays.toString(myArrList2.toArray()));
+        System.out.println("ArrayList2:   " + myArrList2);
         myArrList1.addAll(1, myArrList2);
-        System.out.println("added 2 to 1: " + Arrays.toString(myArrList1.toArray()));
+        System.out.println("added 2 to 1: " + myArrList1);
+        myArrList2.add('d');
+        myArrList2.add('d');
+        myArrList2.add('y');
+        System.out.println("ArrayList2:   " + myArrList2);
+        myArrList1.addAll(4, myArrList2);
+        System.out.println("added 2 to 1: " + myArrList1);
+
+//        MyArrayList myArrList3 = new MyArrayList();
+//        myArrList3.add('z');
+//        System.out.println("ArrayList2:   " + myArrList3);
+        // throw exception if index > ArrayList.size()
+//        myArrList1.addAll(10, myArrList3);
+//        System.out.println("added 2 to 1: " + myArrList1);
+
+//        MyArrayList myArrList3 = new MyArrayList();
+//        myArrList3.add('x');
+//        System.out.println("ArrayList2:   " + myArrList3);
+//        myArrList1.addAll(100, myArrList3);
+//        System.out.println("added 2 to 1: " + myArrList1);
     }
 }

@@ -5,18 +5,21 @@ import java.util.*;
 /**
  * 1. size vs length :
  * - size :
- * - the number of elements.
- * - not updated when grow elementData.
- * - updated when add/remove an element from elementData.
+ * -- the number of elements.
+ * -- not updated when grow elementData.
+ * -- updated when add/remove an element from elementData.
+ * <p>
  * - length :
- * - actual array's length.
- * - updated when grow elementData.
- * - counting the number of elements after grow size and before set value to elementData.
+ * -- actual array's length.
+ * -- updated when grow elementData.
+ * -- counting the number of elements after grow size and before set value to elementData.
+ * <p>
  * - should return ArrayList with the number of size, not the number of length:
- * - if the capacity = 5 and the number of elements = 2:
- * size(): 2 -- [1, 2]
- * length: 5 -- [1, 2, null, null, null]
- * toArray(): [1, 2] <-- return only the actual elements
+ * -- if the capacity = 5 and the number of elements = 2:
+ * >>size(): 2 -- [1, 2]
+ * >>length: 5 -- [1, 2, null, null, null]
+ * >>toArray(): [1, 2] <-- return only the actual elements
+ * <p>
  * 2. Arrays.toString(array) :
  * - return all elements with the length
  * - so need to be 'Arrays.toString(ArrayList.toArray())' to output only the actual elements.
@@ -45,12 +48,14 @@ public class MyArrayList implements List, RandomAccess {
     /**
      * Return elements in a format of '[1, 2, 3, 4]'
      * Override toString() in Object class which returns in a format 'collections.list.MyArrayList@3e3abc88'
+     *
      * @return
      */
     @Override
     public String toString() {
         return toString(toArray());
     }
+
     public String toString(Object[] o) {
         return Arrays.toString(o);
     }
@@ -115,43 +120,49 @@ public class MyArrayList implements List, RandomAccess {
         return elementData = Arrays.copyOf(elementData, minCapacity + minCapacity / 2);
     }
 
+    /**
+     * Remove an element
+     * even multiple same elements are found, remove only the first one
+     *
+     * @param o
+     * @return
+     */
     @Override
     public boolean remove(Object o) {
         int index = indexOf(o);
         if (index == -1)
             return false;
-        System.out.println("found index: " + index);
+//        System.out.println("found index: " + index);
 
-        Object[] newElement = new Object[elementData.length];
-        System.out.println("original: " + Arrays.toString(elementData));
-        System.out.println("new     : " + Arrays.toString(newElement));
-        int i = 0;
+        Object[] newElement = new Object[elementData.length - 1];
+//        System.out.printf("original: length: %d %s%n", elementData.length, Arrays.toString(elementData));
+//        System.out.printf("new     : length: %d %s%n", newElement.length, Arrays.toString(newElement));
+
+        // copy elements before found index
         System.arraycopy(elementData, 0, newElement, 0, index);
-        System.out.println("original: " + Arrays.toString(elementData));
-        System.out.println("new     : " + Arrays.toString(newElement));
-        System.arraycopy(elementData, index + 1, newElement, index, newElement.length - index -1);
-        System.out.println("original: " + Arrays.toString(elementData));
-        System.out.println("new     : " + Arrays.toString(newElement));
-//        while (i < index) {
-//            newElement[i] = elementData[i];
-//            i++;
-////            System.out.printf("[%d]: %s, next i: %d%n", i - 1, Arrays.toString(newElement), i);
-//        }
-//        while (i < size - 1) {
-//            newElement[i] = elementData[i + 1];
-//            i++;
-////            System.out.printf("[%d]: %s, next i: %d%n", i - 1, Arrays.toString(newElement), i);
-//        }
+//        System.out.printf("original: length: %d %s%n", elementData.length, Arrays.toString(elementData));
+//        System.out.printf("new     : length: %d %s%n", newElement.length, Arrays.toString(newElement));
+
+        // copy elements after found index
+        System.arraycopy(elementData, index + 1, newElement, index, newElement.length - index);
+//        System.out.printf("original: length: %d %s%n", elementData.length, Arrays.toString(elementData));
+//        System.out.printf("new     : length: %d %s%n", newElement.length, Arrays.toString(newElement));
 
         elementData = newElement;
         size--;
         return true;
     }
 
+    /**
+     * Return 'true' if Collection c is null.
+     *
+     * @param c
+     * @return
+     */
     @Override
     public boolean containsAll(Collection c) {
         for (Object o : c.toArray()) {
-            if (indexOf(o) < 0)
+            if (!contains(o))
                 return false;
         }
         return true;
@@ -162,37 +173,53 @@ public class MyArrayList implements List, RandomAccess {
         int newLen = c.size();
         if (newLen == 0)
             return false;
-        elementData = grow(size + newLen);
+        if (size + newLen > elementData.length) {
+//            System.out.printf("before grow: length: %d %s%n", elementData.length, Arrays.toString(elementData));
+            elementData = grow(size + newLen);
+//            System.out.printf("after grow : length: %d %s%n", elementData.length, Arrays.toString(elementData));
+        }
         System.arraycopy(c.toArray(), 0, elementData, size, newLen);
         size += newLen;
         return true;
     }
 
+    /**
+     * The original ArrayList: throw exception if index > ArrayList.size()
+     * Better to implement a code to check range first
+     *
+     * @param index
+     * @param c
+     * @return
+     */
     @Override
     public boolean addAll(int index, Collection c) {
         int newLen = c.size();
-        if (c.size() == 0) {
+        if (newLen == 0) {
             return false;
         }
-        // [1 2] <- add [3 4] = [1 3 4 2]   : 2+3=4
-        // [1 2] <- add [3 4 5 6] = [1 3 4 5 6 2]: 2+4=6
-//        int newLen = size + c.size();
+//        System.out.println("newLen: " + newLen);
 
-        elementData = grow(size + newLen);
-        System.out.println("grew size: " + Arrays.toString(elementData));
-        Object[] newElementData = new Object[size + newLen];
-        // move to insert elements
-        //  - seems better to use new Object
-        System.arraycopy(elementData, 0, newElementData, 0, size - index);
-        System.out.println("moved1 : " + Arrays.toString(newElementData));
-        // so here, should keep the resized size!!
+        if (size + newLen > elementData.length) {
+//            System.out.printf("before grow: length: %d %s%n", elementData.length, Arrays.toString(elementData));
+            elementData = grow(size + newLen + index);
+//            System.out.printf("after grow : length: %d %s%n", elementData.length, Arrays.toString(elementData));
+        }
+
+        Object[] newElementData = new Object[elementData.length];
+        // copy elements before index
+        System.arraycopy(elementData, 0, newElementData, 0, index);
+//        System.out.println("copy1 : " + Arrays.toString(newElementData));
+
+        // copy elements after index
+//        if (size > index) {   // temporally if index > size, error will happen here
         System.arraycopy(elementData, index, newElementData, index + newLen, size - index);
-        System.out.println("moved2 : " + Arrays.toString(newElementData));
-        // inside the array, should have null elements with actual resized size.
-        // but when you print, no need to print out null elements
+//            System.out.println("copy2 : " + Arrays.toString(newElementData));
+//        }
+        // insert new elements
+        System.arraycopy(c.toArray(), 0, newElementData, index, newLen);
+//        System.out.println("insert: " + Arrays.toString(newElementData));
 
-        // insert
-        System.arraycopy(c.toArray(), 0, elementData, index, newLen);
+        elementData = newElementData;
         size += newLen;
         return true;
     }
@@ -202,9 +229,7 @@ public class MyArrayList implements List, RandomAccess {
         if (c == null)
             return false;
         for (Object o : c.toArray()) {
-            if (contains(o)) {
-                remove(o);
-            }
+            remove(o);
         }
         return true;
     }
@@ -256,11 +281,13 @@ public class MyArrayList implements List, RandomAccess {
 
     @Override
     public ListIterator listIterator() {
+        // No need to implement
         return null;
     }
 
     @Override
     public ListIterator listIterator(int index) {
+        // No need to implement
         return null;
     }
 
