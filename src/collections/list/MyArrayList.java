@@ -123,6 +123,7 @@ public class MyArrayList implements List, RandomAccess {
     /**
      * Remove an element
      * even multiple same elements are found, remove only the first one
+     * Ues remove(index) since the logic is exactly the same.
      *
      * @param o
      * @return
@@ -134,22 +135,7 @@ public class MyArrayList implements List, RandomAccess {
             return false;
 //        System.out.println("found index: " + index);
 
-        Object[] newElement = new Object[elementData.length - 1];
-//        System.out.printf("original: length: %d %s%n", elementData.length, Arrays.toString(elementData));
-//        System.out.printf("new     : length: %d %s%n", newElement.length, Arrays.toString(newElement));
-
-        // copy elements before found index
-        System.arraycopy(elementData, 0, newElement, 0, index);
-//        System.out.printf("original: length: %d %s%n", elementData.length, Arrays.toString(elementData));
-//        System.out.printf("new     : length: %d %s%n", newElement.length, Arrays.toString(newElement));
-
-        // copy elements after found index
-        System.arraycopy(elementData, index + 1, newElement, index, newElement.length - index);
-//        System.out.printf("original: length: %d %s%n", elementData.length, Arrays.toString(elementData));
-//        System.out.printf("new     : length: %d %s%n", newElement.length, Arrays.toString(newElement));
-
-        elementData = newElement;
-        size--;
+        remove(index);
         return true;
     }
 
@@ -234,49 +220,139 @@ public class MyArrayList implements List, RandomAccess {
         return true;
     }
 
+    /**
+     * Remove all elements that are not contained the collection passes as parameter.
+     * --> retain elements if it is included both collections.
+     *
+     * @param c
+     * @return
+     */
     @Override
     public boolean retainAll(Collection c) {
-        return false;
+        if (c == null)
+            return false;
+
+        boolean found;
+        for (int i = 0; i < size; i++) {
+            found = false;
+            for (Object o : c.toArray()) {
+                if (elementData[i].equals(o)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+                remove(i);
+        }
+        return true;
     }
 
+    /**
+     * Do not change the length of elementData.
+     */
     @Override
     public void clear() {
-
+        for (int i = 0; i < size; i++) {
+            elementData[i] = null;
+        }
+        size = 0;
     }
 
+    /**
+     * Did not add index range check, but Exception is being thrown as same as ArrayList class.
+     *
+     * @param index
+     * @return
+     */
     @Override
     public Object get(int index) {
         return elementData[index];
     }
 
+    /**
+     * Replace the element at the specific index.
+     * Set null if 'element' is null.
+     *
+     * @param index
+     * @param element
+     * @return
+     */
     @Override
     public Object set(int index, Object element) {
-        return null;
+        return elementData[index] = element;
     }
 
+    /**
+     * Use addAll(index, Collection) since the logic is exactly the same.
+     * Call addAll even when 'element' is null since ArrayList class add 'null'.
+     *
+     * @param index
+     * @param element
+     */
     @Override
     public void add(int index, Object element) {
-
+        addAll(index, Arrays.asList(element));
     }
 
+    /**
+     * @param index
+     * @return the element that was removed.
+     */
     @Override
     public Object remove(int index) {
-        return null;
+        if (index == -1)
+            return null;
+//        System.out.println("found index: " + index);
+
+        Object removedElement = get(index);
+        Object[] newElement = new Object[elementData.length - 1];
+//        System.out.printf("original: length: %d %s%n", elementData.length, Arrays.toString(elementData));
+//        System.out.printf("new     : length: %d %s%n", newElement.length, Arrays.toString(newElement));
+
+        // copy elements before found index
+        System.arraycopy(elementData, 0, newElement, 0, index);
+//        System.out.printf("original: length: %d %s%n", elementData.length, Arrays.toString(elementData));
+//        System.out.printf("new     : length: %d %s%n", newElement.length, Arrays.toString(newElement));
+
+        // copy elements after found index
+        System.arraycopy(elementData, index + 1, newElement, index, newElement.length - index);
+//        System.out.printf("original: length: %d %s%n", elementData.length, Arrays.toString(elementData));
+//        System.out.printf("new     : length: %d %s%n", newElement.length, Arrays.toString(newElement));
+
+        elementData = newElement;
+        size--;
+        return removedElement;
     }
 
     @Override
     public int indexOf(Object o) {
-        for (int i = 0; i < size; i++) {
+        return indexOf(o, 0, false);
+    }
+
+    /**
+     * Return index of element.
+     *
+     * @param o          target element which needs to be found
+     * @param startIndex a number of index where to start searching in the list
+     * @param tillLast   boolean if to continue to search after an index found
+     * @return
+     */
+    public int indexOf(Object o, int startIndex, boolean tillLast) {
+        int found = -1;
+        for (int i = startIndex; i < size; i++) {
             if (o.equals(elementData[i])) {
-                return i;
+                if (!tillLast)
+                    return i;
+                else
+                    found = i;
             }
         }
-        return -1;
+        return found;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        return indexOf(o, 0, true);
     }
 
     @Override
@@ -291,8 +367,19 @@ public class MyArrayList implements List, RandomAccess {
         return null;
     }
 
+    /**
+     * Better to add range check first.
+     * --> currently, arraycopy throws exceptions
+     *
+     * @param fromIndex
+     * @param toIndex
+     * @return
+     */
     @Override
     public List subList(int fromIndex, int toIndex) {
-        return null;
+        int len = toIndex - fromIndex;
+        Object[] obj = new Object[len];
+        System.arraycopy(elementData, fromIndex, obj, 0, len);
+        return Arrays.asList(obj);
     }
 }

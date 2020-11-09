@@ -12,13 +12,20 @@ public class DriverArrayList {
 //        testAdd();
 //        testContains();
 //        testToArray();
-
 //        testRemoveObj();
-
 //        testRemoveAll();
 //        testContainsAll();
 //        testAddAll();
 //        testAddAllIndex();
+//        testRetainAll();
+//        testClear();
+//        testGet();
+//        testSet();
+//        testAddIndex();
+//        testRemoveIndex();
+//        testIndexOf();
+//        testLastIndexOf();
+//        testSubList();
     }
 
     private static void diffArrayListVsMyArrayList() {
@@ -398,5 +405,240 @@ public class DriverArrayList {
 //        System.out.println("ArrayList2:   " + myArrList3);
 //        myArrList1.addAll(100, myArrList3);
 //        System.out.println("added 2 to 1: " + myArrList1);
+    }
+
+    private static void testRetainAll() {
+        System.out.println("----- ArrayList -----");
+        ArrayList<Character> arrList1 = new ArrayList<>();
+        arrList1.add('a');
+        arrList1.add('b');
+        arrList1.add('c');
+        arrList1.add('d');
+
+        System.out.println("ArrayList1:   " + arrList1);
+
+        ArrayList<Character> arrList2 = new ArrayList<>();
+        arrList2.add('c');
+        arrList2.add('a');
+        arrList2.add('z');
+        System.out.println("ArrayList2:   " + arrList2);
+
+        arrList1.retainAll(arrList2);
+        System.out.println("retain ArrayList2 of ArrayList1:" + arrList1);
+
+
+        System.out.println("----- MyArrayList -----");
+        MyArrayList myArrList1 = new MyArrayList();
+        myArrList1.add('a');
+        myArrList1.add('b');
+        myArrList1.add('c');
+        myArrList1.add('d');
+        System.out.println("ArrayList1:   " + myArrList1);
+
+        MyArrayList myArrList2 = new MyArrayList();
+        myArrList2.add('c');
+        myArrList2.add('a');
+        myArrList2.add('z');
+        System.out.println("ArrayList2:   " + myArrList2);
+
+        myArrList1.retainAll(myArrList2);
+        System.out.println("retain ArrayList2 of ArrayList1:" + myArrList1);
+    }
+
+    private static void testClear() {
+        System.out.println("----- ArrayList -----");
+        ArrayList<Character> arrList1 = new ArrayList<>();
+        arrList1.add('a');
+        arrList1.add('b');
+        arrList1.add('c');
+        arrList1.add('d');
+
+        System.out.println("ArrayList1:   " + arrList1);
+        arrList1.clear();
+        System.out.println("cleared   :   " + arrList1);
+
+
+        System.out.println("----- MyArrayList -----");
+        MyArrayList myArrList1 = new MyArrayList();
+        myArrList1.add('a');
+        myArrList1.add('b');
+        myArrList1.add('c');
+        myArrList1.add('d');
+        System.out.println("ArrayList1:   " + myArrList1);
+
+        myArrList1.clear();
+        System.out.println("cleared   :   " + myArrList1);
+    }
+
+    private static void testGet() {
+        System.out.println("----- ArrayList -----");
+        ArrayList<Character> arrList1 = new ArrayList<>();
+        arrList1.add('a');
+        arrList1.add('b');
+        arrList1.add('c');
+        arrList1.add('d');
+        System.out.println("ArrayList1:   " + arrList1);
+        System.out.printf("Index [%d]: %s%n", 2, arrList1.get(2));
+        // Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 100 out of bounds for length 4
+//        System.out.printf("Index [%d]: %s%n", 2, arrList1.get(100));
+
+
+        System.out.println("----- MyArrayList -----");
+        MyArrayList myArrList1 = new MyArrayList();
+        myArrList1.add('a');
+        myArrList1.add('b');
+        myArrList1.add('c');
+        myArrList1.add('d');
+        System.out.println("ArrayList1:   " + myArrList1);
+        System.out.printf("Index [%d]: %s%n", 2, myArrList1.get(2));
+        // Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 100 out of bounds for length 10
+//        System.out.printf("Index [%d]: %s%n", 2, myArrList1.get(100));
+    }
+
+    private static void testSet() {
+        System.out.println("----- ArrayList -----");
+        ArrayList<Character> arrList1 = new ArrayList<>();
+        arrList1.add('a');
+        arrList1.add('b');
+        arrList1.add('c');
+        arrList1.add('d');
+        System.out.println("ArrayList1:   " + arrList1);
+        arrList1.set(2, 'z');
+        System.out.printf("set [%d] '%s':  %s%n", 2, 'z', arrList1);
+        arrList1.set(3, null);
+        System.out.printf("set [%d] '%s':  %s%n", 3, null, arrList1);
+
+
+        System.out.println("----- MyArrayList -----");
+        MyArrayList myArrList1 = new MyArrayList();
+        myArrList1.add('a');
+        myArrList1.add('b');
+        myArrList1.add('c');
+        myArrList1.add('d');
+        System.out.println("ArrayList1:   " + myArrList1);
+        myArrList1.set(2, 'z');
+        System.out.printf("set [%d] '%s':  %s%n", 2, 'z', myArrList1);
+        myArrList1.set(3, null);
+        System.out.printf("set [%d] '%s':  %s%n", 3, null, myArrList1);
+    }
+
+    private static void testAddIndex() {
+        System.out.println("----- ArrayList -----");
+        ArrayList<Character> arrList1 = new ArrayList<>();
+        arrList1.add('a');
+        arrList1.add('b');
+        arrList1.add('c');
+        arrList1.add('d');
+        System.out.println("ArrayList1:   " + arrList1);
+        arrList1.add(3, 'z');
+        System.out.printf("add [%d] '%s':  %s%n", 3, 'z', arrList1);
+        arrList1.add(4, null);
+        System.out.printf("add [%d] '%s':  %s%n", 4, null, arrList1);
+
+
+        System.out.println("----- MyArrayList -----");
+        MyArrayList myArrList1 = new MyArrayList();
+        myArrList1.add('a');
+        myArrList1.add('b');
+        myArrList1.add('c');
+        myArrList1.add('d');
+        System.out.println("ArrayList1:   " + myArrList1);
+        myArrList1.add(3, 'z');
+        System.out.printf("set [%d] '%s':  %s%n", 3, 'z', myArrList1);
+        myArrList1.add(4, null);
+        System.out.printf("set [%d] '%s':  %s%n", 4, null, myArrList1);
+    }
+
+    private static void testRemoveIndex() {
+        System.out.println("----- ArrayList -----");
+        ArrayList<Character> arrList1 = new ArrayList<>();
+        arrList1.add('a');
+        arrList1.add('b');
+        arrList1.add('c');
+        arrList1.add('d');
+        System.out.println("ArrayList1:   " + arrList1);
+        arrList1.remove(2);
+        System.out.printf("remove [%d]:   %s%n", 2, arrList1);
+
+
+        System.out.println("----- MyArrayList -----");
+        MyArrayList myArrList1 = new MyArrayList();
+        myArrList1.add('a');
+        myArrList1.add('b');
+        myArrList1.add('c');
+        myArrList1.add('d');
+        System.out.println("ArrayList1:   " + myArrList1);
+        myArrList1.remove(2);
+        System.out.printf("remove [%d]:   %s%n", 2, myArrList1);
+    }
+
+    private static void testIndexOf() {
+        System.out.println("----- ArrayList -----");
+        ArrayList<Character> arrList1 = new ArrayList<>();
+        arrList1.add('a');
+        arrList1.add('b');
+        arrList1.add('c');
+        System.out.println("ArrayList1:   " + arrList1);
+        System.out.printf("index of '%s': %s%n", 'b', arrList1.indexOf('b'));
+
+        System.out.println("----- MyArrayList -----");
+        MyArrayList myArrList1 = new MyArrayList();
+        myArrList1.add('a');
+        myArrList1.add('b');
+        myArrList1.add('c');
+        System.out.println("ArrayList1:   " + myArrList1);
+        System.out.printf("index of '%s': %s%n", 'b', myArrList1.indexOf('b'));
+    }
+
+    private static void testLastIndexOf() {
+        System.out.println("----- ArrayList -----");
+        ArrayList<Character> arrList1 = new ArrayList<>();
+        arrList1.add('a');
+        arrList1.add('b');
+        arrList1.add('c');
+        arrList1.add('b');
+        arrList1.add('a');
+        System.out.println("ArrayList1:   " + arrList1);
+        System.out.printf("last index of '%s': %s%n", 'b', arrList1.lastIndexOf('b'));
+        System.out.printf("last index of '%s': %s%n", 'c', arrList1.lastIndexOf('c'));
+        System.out.printf("last index of '%s': %s%n", 'z', arrList1.lastIndexOf('z'));
+
+        System.out.println("----- MyArrayList -----");
+        MyArrayList myArrList1 = new MyArrayList();
+        myArrList1.add('a');
+        myArrList1.add('b');
+        myArrList1.add('c');
+        myArrList1.add('b');
+        myArrList1.add('a');
+        System.out.println("ArrayList1:   " + myArrList1);
+        System.out.printf("last index of '%s': %s%n", 'b', myArrList1.lastIndexOf('b'));
+        System.out.printf("last index of '%s': %s%n", 'c', myArrList1.lastIndexOf('c'));
+        System.out.printf("last index of '%s': %s%n", 'z', myArrList1.lastIndexOf('z'));
+    }
+
+    private static void testSubList() {
+        System.out.println("----- ArrayList -----");
+        ArrayList<Character> arrList1 = new ArrayList<>();
+        arrList1.add('a');
+        arrList1.add('b');
+        arrList1.add('c');
+        arrList1.add('d');
+        arrList1.add('e');
+        System.out.println("ArrayList1:   " + arrList1);
+        System.out.printf("sublist %d to %d: %s%n", 2, 4, arrList1.subList(2, 4));
+//        System.out.printf("sublist %d to %d: %s%n", 2, 100, arrList1.subList(2, 100));
+//        System.out.printf("sublist %d to %d: %s%n", 3, 1, arrList1.subList(3, 1));
+
+        System.out.println("----- MyArrayList -----");
+        MyArrayList myArrList1 = new MyArrayList();
+        myArrList1.add('a');
+        myArrList1.add('b');
+        myArrList1.add('c');
+        myArrList1.add('d');
+        myArrList1.add('e');
+        System.out.println("ArrayList1:   " + myArrList1);
+        System.out.printf("sublist %d to %d: %s%n", 2, 4, myArrList1.subList(2, 4));
+//        System.out.printf("sublist %d to %d: %s%n", 2,100, myArrList1.subList(2, 100));
+//        System.out.printf("sublist %d to %d: %s%n", 3, 1, myArrList1.subList(3, 1));
     }
 }
