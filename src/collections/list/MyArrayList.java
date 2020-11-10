@@ -222,7 +222,7 @@ public class MyArrayList implements List, RandomAccess {
 
     /**
      * Remove all elements that are not contained the collection passes as parameter.
-     * --> retain elements if it is included both collections.
+     * --> retain elements if it is included in both collections.
      *
      * @param c
      * @return

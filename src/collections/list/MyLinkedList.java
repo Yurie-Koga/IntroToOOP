@@ -14,13 +14,9 @@ package collections.list;
  * - <E> stands for Element
  */
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-/**
- * Draw diagram to make sure what is going on!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- *
- * @param <E>
- */
 public class MyLinkedList<E> {
     private Node<E> head, tail;     // declared as null
     private int size;
@@ -28,6 +24,7 @@ public class MyLinkedList<E> {
     public MyLinkedList() {
     }
 
+    // O(1)
     public void addFirst(E e) {
         final Node<E> h = head;
         final Node<E> newNode = new Node<>(e, h);
@@ -39,6 +36,7 @@ public class MyLinkedList<E> {
         size++;
     }
 
+    // O(1)
     public void addLast(E e) {
         final Node<E> t = tail;
         final Node<E> newNode = new Node<>(e, null);
@@ -52,6 +50,26 @@ public class MyLinkedList<E> {
         size++;
     }
 
+    // O(n)
+    public void add(int index, E e) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("index: " + index + ", size: " + size);
+        }
+        if (index == 0) {
+            addFirst(e);
+        } else if (index == size) {
+            addLast(e);
+        } else {
+            Node<E> cur = head;
+            for (int i = 0; i < index - 1; i++) {
+                cur = cur.next;
+            }
+            cur.next = new Node<>(e, cur.next);
+            size++;
+        }
+    }
+
+    // O(1)
     public E removeFirst() {
         final Node<E> h = head;
         if (h == null) {
@@ -72,49 +90,157 @@ public class MyLinkedList<E> {
         return data;
     }
 
-    public E removeLast(){
-        return null;
+    // O(1)
+    public E removeLast() {
+        final Node<E> t = tail;
+        if (t == null) {
+            // removing from the empty linked list
+            throw new NoSuchElementException("list is empty");
+        }
+
+        E data = t.data;
+        // get the node prior to tail
+        tail = getNodeAt(size - 2);
+        tail.next = null;
+        size--;
+//        System.out.println("size removeLast: " + size);
+        return data;
     }
 
     // O(1)
-    public E getFirst(){
-        return null;
+    public E getFirst() {
+        if (head == null) {
+            throw new NoSuchElementException("list is empty");
+        }
+        return head.data;
     }
-    // O(1)
-    public E getLast(){
-return null;
-    }
-    // O(n)
-    public E get(int index){
-return null;
-    }
-    //O(n)
-    public E set(int index, E e){
-return null;
-    }
-    //O(n)
-    public int indexOf(E e){
-        if(e==null){
-//            return -1;
-            for(Node<E> x = head;x!=null;x=x.next){
-                if(x.equals(null)){
 
-                }
-            }
+    // O(1)
+    public E getLast() {
+        if (tail == null) {
+            throw new NoSuchElementException("list is empty");
+        }
+        return tail.data;
+    }
+
+    private Node<E> getNodeAt(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("index: " + index + ", size: " + size);
         }
         Node<E> cur = head;
-        for(int i = 0;i<size;i++){
-
-//            if(e.equals(head.data))
+        for (int i = 0; i < index; i++) {
+            cur = cur.next;
         }
-        return 0;
+//        System.out.printf("getNodeAt(%d): %s%n", index, cur.data);
+        return cur;
     }
 
-    public int size(){
+    // O(n)
+    public E get(int index) {
+        return getNodeAt(index).data;
+    }
+
+    //O(n)
+    public E set(int index, E e) {
+        Node<E> cur = getNodeAt(index);
+        E oldValue = cur.data;
+        cur.data = e;
+        return oldValue;
+    }
+
+    //O(n)
+    public int indexOf(E e) {
+        int index = 0;
+        if (e == null) {
+            for (Node<E> x = head; x != null; x = x.next) {
+                if (x.data == null) {
+                    return index;
+                }
+                index++;
+            }
+        } else {
+            for (Node<E> x = head; x != null; x = x.next) {
+                if (e.equals(x.data)) {
+                    return index;
+                }
+                index++;
+            }
+        }
+        return -1;
+    }
+
+    public int size() {
         return size;
     }
 
+    /**
+     * Remove the element e from the list
+     *
+     * @param e
+     * @return
+     */
+    public boolean remove(E e) {
+        int target = indexOf(e);
+        remove(target);
+        return true;
+    }
 
+    /**
+     * Remove the element at index
+     * O(N)
+     *
+     * @param index
+     * @return
+     */
+    public boolean remove(int index) {
+        if (index < 0)
+            return false;
+        if (index == 0) {
+            removeFirst();
+//            System.out.println("called removeFirst()");
+            return true;
+        }
+        if (index == size - 1) {
+            removeLast();
+//            System.out.println("called removeLast()");
+            return true;
+        }
+
+        Node<E> before = getNodeAt(index - 1);
+        Node<E> after = getNodeAt(index + 1);
+        Node<E> n = getNodeAt(index);
+        n = null;
+
+        before.next = after;
+        size--;
+        return true;
+    }
+
+    /**
+     * Return LinkedList as string of array: e.g. [1, 2, 3]
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return Arrays.toString(toArray());
+    }
+
+    /**
+     * Convert LinkedList to an array
+     *
+     * @return
+     */
+    public Object[] toArray() {
+        Object[] result = new Object[size];
+//        System.out.println("size toArray: " + size);
+        int i = 0;
+        for (Node<E> x = head; x != null; x = x.next) {
+//            System.out.println("index[" + i + "]");
+            result[i++] = x.data;
+        }
+        return result;
+    }
 
     // Nested class: which is used inside tha class
     // static nested class: no need to create instance, also can create instance.
