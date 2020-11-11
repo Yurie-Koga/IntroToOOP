@@ -266,6 +266,9 @@ public class MyArrayList implements List, RandomAccess {
      */
     @Override
     public Object get(int index) {
+        if (index < 0 || index >= size) {
+            throw new ArrayIndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
         return elementData[index];
     }
 
@@ -279,6 +282,9 @@ public class MyArrayList implements List, RandomAccess {
      */
     @Override
     public Object set(int index, Object element) {
+        if (index < 0 || index >= size) {
+            throw new ArrayIndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
         return elementData[index] = element;
     }
 
