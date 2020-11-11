@@ -150,23 +150,38 @@ public class MyLinkedList<E> {
 
     //O(n)
     public int indexOf(E e) {
+        return indexOf(e, 0, false);
+    }
+
+    /**
+     * @param e          target element which needs to be found
+     * @param startIndex a number of index where to start searching in the list
+     * @param toLast     boolean if to continue to search after an index found
+     * @return
+     */
+    public int indexOf(E e, int startIndex, boolean toLast) {
         int index = 0;
+        int found = -1;
         if (e == null) {
             for (Node<E> x = head; x != null; x = x.next) {
-                if (x.data == null) {
-                    return index;
+                if (x.data == null && index >= startIndex) {
+                    found = index;
+                    if (!toLast || index == size - 1)
+                        return found;
                 }
                 index++;
             }
         } else {
             for (Node<E> x = head; x != null; x = x.next) {
-                if (e.equals(x.data)) {
-                    return index;
+                if (e.equals(x.data) && index >= startIndex) {
+                    found = index;
+                    if (!toLast || index == size - 1)
+                        return found;
                 }
                 index++;
             }
         }
-        return -1;
+        return found;
     }
 
     public int size() {
@@ -217,6 +232,65 @@ public class MyLinkedList<E> {
     }
 
     /**
+     * Returns the index of the last occurrence of element e
+     * O(N)
+     * <p>
+     * ll = [1, 1, 2, 3, 1, 5, 1, 2]
+     * ll.lastIndexOf(1) -> 6
+     *
+     * @param e
+     * @return the index of the last occurrence of element e
+     */
+    public int lastIndexOf(E e) {
+        return indexOf(e, 0, true);
+    }
+
+    /**
+     * Reverses the current linked list
+     * "A" -> "B" -> "C" -> null
+     * should be
+     * "C" -> "B" -> "A" -> null
+     * <p>
+     * Lists by steps
+     * 1. the original elements                        : [a, b, c, d]
+     * 2. add the reversed original elements to the end: [a, b, c, d, c, b, a]
+     * 3. remove the original elements at the beginning:          [d, c, b, a]
+     */
+    public boolean reverse() {
+        if (head == null || tail == null) {
+            throw new NoSuchElementException("list is empty");
+        }
+
+        int orgSize = size;
+//        System.out.println("size original elements: " + size);
+//        System.out.printf("head = %s, tail = %s%n", head.data, tail.data);
+
+        // add the reversed original elements to the end
+        // - start from index = size-2: no need to add the last element, tail will be head
+        for (int i = orgSize - 2; i >= 0; i--) {
+            E data = getNodeAt(i).data;
+            addLast(data);
+        }
+//        System.out.println("size added reversed elements: " + size);
+//        System.out.println("added reversed elements: " + toString());
+//        System.out.printf("head = %s, tail = %s%n", head.data, tail.data);
+
+        // remove the original elements at the beginning
+        // - end at index = size-2: no need to remove the last element, tail will be head
+        for (int i = 0; i < orgSize - 1; i++) {
+            removeFirst();
+        }
+//        System.out.println("size removed original elements: " + size);
+//        System.out.printf("head = %s, tail = %s%n", head.data, tail.data);
+        return false;
+    }
+
+    // O(N)
+    public boolean contains(E e) {
+        return indexOf(e) >= 0;
+    }
+
+    /**
      * Return LinkedList as string of array: e.g. [1, 2, 3]
      *
      * @return
@@ -253,6 +327,4 @@ public class MyLinkedList<E> {
             this.next = next;
         }
     }
-
-
 }

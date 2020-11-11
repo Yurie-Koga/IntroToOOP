@@ -334,14 +334,14 @@ public class MyArrayList implements List, RandomAccess {
      *
      * @param o          target element which needs to be found
      * @param startIndex a number of index where to start searching in the list
-     * @param tillLast   boolean if to continue to search after an index found
+     * @param toLast     boolean if to continue to search after an index found
      * @return
      */
-    public int indexOf(Object o, int startIndex, boolean tillLast) {
+    public int indexOf(Object o, int startIndex, boolean toLast) {
         int found = -1;
         for (int i = startIndex; i < size; i++) {
             if (o.equals(elementData[i])) {
-                if (!tillLast)
+                if (!toLast)
                     return i;
                 else
                     found = i;

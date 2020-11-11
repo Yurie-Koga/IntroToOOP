@@ -12,6 +12,10 @@ public class DriverLinkedList {
 //        testRemoveLast();
 //        testRemoveObj();
 //        testRemoveIndex();
+//        testIndexOf();
+//        testLastIndexOf();
+//        testReverse();
+        testContains();
     }
 
     private static void testAddFirst() {
@@ -160,5 +164,102 @@ public class DriverLinkedList {
         System.out.println("LinkedList  : " + myll);
         myll.remove(1);
         System.out.printf("remove at [%d] : %s%n", 1, myll);
+    }
+
+    private static void testIndexOf() {
+        System.out.println("----- LinkedList -----");
+        LinkedList<Character> ll = new LinkedList<>();
+        ll.addLast('a');
+        ll.addLast('b');
+        ll.addLast('a');
+        ll.addLast('c');
+        System.out.println("LinkedList  : " + ll);
+        System.out.printf("index of '%s' : %d%n", 'a', ll.indexOf('a'));
+        System.out.printf("index of '%s' : %d%n", 'c', ll.indexOf('c'));
+        System.out.printf("index of '%s' : %d%n", 'z', ll.indexOf('z'));
+
+        System.out.println("----- MyLinkedList -----");
+        MyLinkedList<Character> myll = new MyLinkedList<>();
+        myll.addLast('a');
+        myll.addLast('b');
+        myll.addLast('a');
+        myll.addLast('c');
+        System.out.println("LinkedList  : " + myll);
+        System.out.printf("index of '%s' : %d%n", 'a', myll.indexOf('a'));
+        System.out.printf("index of '%s' : %d%n", 'c', myll.indexOf('c'));
+        System.out.printf("index of '%s' : %d%n", 'z', myll.indexOf('z'));
+    }
+
+    private static void testLastIndexOf() {
+        System.out.println("----- LinkedList -----");
+        LinkedList<Character> ll = new LinkedList<>();
+        ll.addLast('a');
+        ll.addLast('b');
+        ll.addLast('a');
+        ll.addLast('c');
+        System.out.println("LinkedList  : " + ll);
+        System.out.printf("last index of '%s' : %d%n", 'a', ll.lastIndexOf('a'));
+        System.out.printf("last index of '%s' : %d%n", 'z', ll.lastIndexOf('z'));
+
+        System.out.println("----- MyLinkedList -----");
+        MyLinkedList<Character> myll = new MyLinkedList<>();
+        myll.addLast('a');
+        myll.addLast('b');
+        myll.addLast('a');
+        myll.addLast('c');
+        System.out.println("LinkedList  : " + myll);
+        System.out.printf("last index of '%s' : %d%n", 'a', myll.lastIndexOf('a'));
+        System.out.printf("last index of '%s' : %d%n", 'b', myll.lastIndexOf('b'));
+        System.out.printf("last index of '%s' : %d%n", 'c', myll.lastIndexOf('c'));
+        System.out.printf("last index of '%s' : %d%n", 'z', myll.lastIndexOf('z'));
+    }
+
+    private static void testReverse() {
+        // No reverse() method in LinkedList class
+//        System.out.println("----- LinkedList -----");
+//        LinkedList<Character> ll = new LinkedList<>();
+//        ll.addLast('a');
+//        ll.addLast('b');
+//        ll.addLast('c');
+//        ll.addLast('d');
+//        System.out.println("LinkedList  : " + ll);
+
+        System.out.println("----- MyLinkedList -----");
+        MyLinkedList<Character> myll = new MyLinkedList<>();
+        myll.addLast('a');
+        myll.addLast('b');
+        myll.addLast('c');
+        myll.addLast('d');
+        System.out.println("LinkedList  : " + myll);
+        myll.reverse();
+        System.out.println("reversed    : " + myll);
+        myll.addLast('z');
+        myll.addFirst('y');
+        System.out.println("LinkedList  : " + myll);
+        myll.reverse();
+        System.out.println("reversed    : " + myll);
+    }
+
+    private static void testContains() {
+        // No reverse() method in LinkedList class
+        System.out.println("----- LinkedList -----");
+        LinkedList<Character> ll = new LinkedList<>();
+        ll.addLast('a');
+        ll.addLast('b');
+        ll.addLast('c');
+        ll.addLast('d');
+        System.out.println("LinkedList  : " + ll);
+        System.out.printf("contains '%s': %s%n", 'c', ll.contains('c'));
+        System.out.printf("contains '%s': %s%n", 'z', ll.contains('z'));
+
+        System.out.println("----- MyLinkedList -----");
+        MyLinkedList<Character> myll = new MyLinkedList<>();
+        myll.addLast('a');
+        myll.addLast('b');
+        myll.addLast('c');
+        myll.addLast('d');
+        System.out.println("LinkedList  : " + myll);
+        System.out.printf("contains '%s': %s%n", 'c', myll.contains('c'));
+        System.out.printf("contains '%s': %s%n", 'z', myll.contains('z'));
     }
 }
