@@ -19,6 +19,13 @@ public class ProductManager extends Employee {
     }
 
     @Override
+    public long getSalary() {
+//        return super.getSalary();
+        System.out.println("ProductManager class");
+        return 7777;
+    }
+
+    @Override
     public String toString() {
         // w/o 'this' for get methods, still it calls @ Employee class
         return "ProductManager{" +

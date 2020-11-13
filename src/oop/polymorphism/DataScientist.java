@@ -19,6 +19,13 @@ public class DataScientist extends Employee {
     }
 
     @Override
+    public long getSalary() {
+//        return super.getSalary();
+        System.out.println("DataScientist class");
+        return 999;
+    }
+
+    @Override
     public String toString() {
         return "DataScientist{" +
                 "employeeId='" + super.getEmployeeId() + '\'' +

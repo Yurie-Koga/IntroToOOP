@@ -23,6 +23,7 @@ public class Employee {
     }
 
     public long getSalary() {
+        System.out.println("Employee class");
         return salary;
     }
 

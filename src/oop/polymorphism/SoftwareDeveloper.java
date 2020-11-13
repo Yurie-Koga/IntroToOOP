@@ -21,7 +21,9 @@ public class SoftwareDeveloper extends Employee {
 
     @Override
     public long getSalary() {
-        return super.getSalary() + Math.round(super.getSalary() * BONUS_RATE);
+        System.out.println("SW class");
+//        return super.getSalary() + Math.round(super.getSalary() * BONUS_RATE);
+        return 8888;
     }
 
     // override toString @Employee class

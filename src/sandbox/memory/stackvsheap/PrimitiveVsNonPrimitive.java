@@ -2,7 +2,8 @@ package sandbox.memory.stackvsheap;
 
 public class PrimitiveVsNonPrimitive {
     public static void main(String[] args) {
-        testPrimitiveVsNonPrimitive();
+//        testPrimitiveVsNonPrimitive();
+        testString();
     }
 
     private static void testPrimitiveVsNonPrimitive() {
@@ -26,5 +27,26 @@ public class PrimitiveVsNonPrimitive {
     private static void updateHeap(int[] heap) {
         heap[0] = 99;
         System.out.printf("@method : %d%n", heap[0]);
+    }
+
+    private static void testString() {
+        // '==' operator: compare memory locations
+        //      -> should be used for primitive types which store data to memory directory (Stack)
+        // 'equals()' method: compare the content stored in two objects
+        //      -> should be used for non-primitive types which store data at Heap
+
+        System.out.println("----- String Literal -----");
+        // created at the time of compilation:
+        //      allocated in HEAP or SCP (String Constant Pool, read-only memory)
+        //  - the mechanism called 'Interning' = storing
+        //  - 1. allocate in Heap and SCP if no matches of the same sequence of characters
+        //  - 2. if found, compiler refers to SCP instead of creating a new object
+        String name1 = "Yurie";
+        System.out.println(name1 == "Yurie");   // return true
+
+        System.out.println("----- String Object -----");
+        // created at the runtime: always allocated in 'HEAP'
+        String name2 = new String("Tomato");
+        System.out.println(name2 == "Tomato");   // return false
     }
 }

@@ -15,6 +15,13 @@ public class Designer extends Employee {
     }
 
     @Override
+    public long getSalary() {
+//        return super.getSalary();
+        System.out.println("Designer class");
+        return 6666;
+    }
+
+    @Override
     public String toString() {
         return "Designer{" +
                 "employeeId='" + super.getEmployeeId() + '\'' +
